@@ -1,0 +1,96 @@
+#display{
+    position:relative;
+}
+#chocoContainerLeft{
+    transform:scale(0.085);
+    position:absolute;
+    white-space: nowrap; /*子要素が折り返さないようにする */
+    overflow: hidden; 
+    top:-450px;
+    left:-3650px;
+}
+#chocoContainerRight{
+    transform:scale(0.085);
+    position:absolute;
+    white-space: nowrap; /* 子要素が折り返さないようにする */
+    overflow: hidden;
+    top:-450px;
+    left:-2430px;
+}
+/* pineleftの子要素 */
+#pineContainerLeft{
+    transform:scale(0.12);
+    position:absolute;
+    top:-280px;
+    left:-2350px;
+    white-space: nowrap; /* 子要素が折り返さないようにする */
+    overflow: hidden;
+}
+#pineContainerRight{
+    position:absolute;
+    transform:scale(0.12);
+    position:absolute;
+    white-space: nowrap; /* 子要素が折り返さないようにする */
+    overflow: hidden;
+    top:-280px;
+    left:-1120px;
+}
+#breadContainerLeft{
+    transform:scale(0.12);
+    position:absolute;
+    white-space: nowrap; /* 子要素が折り返さないようにする */
+    overflow: hidden;
+    top:-120px;
+    left:-1420px;
+}
+#breadContainerRight{
+    transform:scale(0.12);
+    position:absolute;
+    white-space: nowrap; /* 子要素が折り返さないようにする */
+    overflow: hidden;
+    top:-120px;
+    left:-170px;
+}
+#bon1{
+    position:absolute;
+    transform:scale(0.2);
+}
+#bon2{
+    position:absolute;
+    transform:scale(0.2);
+}
+#check1{
+    position:absolute;
+    transform:scale(0.5);
+}
+#check2{
+    position:absolute;
+    transform:scale(0.5);
+}
+#leftUniversity{
+    position:absolute;
+    transform:translate(-50%, -50%) scale(5);
+    left:470px;
+    top:1000px;
+}
+
+#rightUniversity{
+    position:absolute;
+    transform:translate(-50%, -50%) scale(5);
+    left:1450px;
+    top:1000px;
+}
+#point1{
+    
+    position:absolute;
+    transform:translate(-50%, -50%) scale(25);
+    top:700px;
+    left:420px;   
+}
+#point2{
+    
+    position:absolute;
+    transform:translate(-50%, -50%) scale(25);
+    top:700px;
+    left:1450px;   
+}
