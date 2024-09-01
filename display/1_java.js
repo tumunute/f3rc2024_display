@@ -59,55 +59,71 @@ const rightUniversity=document.getElementById("rightUniversity");
 
 // スプシで取得した範囲
 const sheetId = '1mzq8dD3eU-CaZxN-gWO1JmFkO3Jht_C3YSY_W-lzrFs';
+// const sheetData="original_sheet!G32:G45"
+const sheetData = [
+    "original_sheet!G32",
+    "original_sheet!G33",
+    "original_sheet!G34",
+    "original_sheet!G35",
+    "original_sheet!G36",
+    "original_sheet!G37",
+    "original_sheet!G38",
+    "original_sheet!G39",
+    "original_sheet!G40",
+    "original_sheet!G41",
+    "original_sheet!G42",
+    "original_sheet!G43",
+    "original_sheet!G44",
+    "original_sheet!G45",
+];
 
-const rightSum = 'original_sheet!L26';
-const leftSum = 'original_sheet!L12';
-const turnLeft= 'original_sheet!B5';
-const turnRight= 'original_sheet!B19';
-const turnLeftBon="original_sheet!N5";
-const turnRightBon="original_sheet!N19";
-const pineNumberLeft="original_sheet!H10";
-const pineNumberRight="original_sheet!H24";
-const chocoNumberLeft="original_sheet!K10";
-const chocoNumberRight="original_sheet!K24";
-const breadNumberLeft="original_sheet!E8";
-const breadNumberRight="original_sheet!E22";
-const leftUniversityCell="original_sheet!B2"
-const rightUniversityCell="original_sheet!B16"
+// const leftSum = 'original_sheet!L12';//0
+// const rightSum = 'original_sheet!L26';//1
+// const turnLeft= 'original_sheet!B5';//2
+// const turnRight= 'original_sheet!B19';//3
+// const turnLeftBon="original_sheet!N5";//4
+// const turnRightBon="original_sheet!N19";//5
+// const pineNumberLeft="original_sheet!H10";//6
+// const pineNumberRight="original_sheet!H24";//7
+// const chocoNumberLeft="original_sheet!K10";//8
+// const chocoNumberRight="original_sheet!K24";//9
+// const breadNumberLeft="original_sheet!E8";//10
+// const breadNumberRight="original_sheet!E22"//11
+// const leftUniversityCell="original_sheet!B2"//12
+// const rightUniversityCell="original_sheet!B16"//13
 
 
 const apiKey = 'AIzaSyCycowG3GCqzemN0Pd7bXa2fA6Qpkw2Kx0';
 
-// スプシで取得した値をそのままブラウザに表示する　という関数
+
 async function fetchData(range, elementId) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+    
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+        }
         const data = await response.json();
+
+        if (!data.values || data.values.length === 0) {
+            throw new Error('指定した範囲にデータが存在しません。');
+        }
+
         const cellValue = data.values[0][0];
         localStorage.setItem(elementId, cellValue);
         document.getElementById(elementId).innerText = cellValue;
+
         return cellValue;
     } catch (error) {
-        // console.error('Error fetching data:', error);
+        console.error('データ取得エラー:', error);
         document.getElementById(elementId).innerText = '---';
         return "---";
     }
 }
 
-// // スプシで取得した0か1の値に対して、1であれば指定した画像を表示、0であれば表示しない　という関数
-// function updateImageDisplay(range,elementId) {
-//     Promise.all([
-//         fetchData(range,elementId)
-//     ]).then(values => {
-//         // いずれかのセルの値が "1" であれば画像を表示
-//         if (values.includes("1")) {
-//             imageElement.style.display = 'block';
-//         } else {
-//             imageElement.style.display = 'none';
-//         }
-//     });
-// }
+console.log(fetchData(sheetData[0], 'point1'));
+fetchData(sheetData[1], 'point2');
 
 // スプシで取得した0か1の値に対して、1であれば指定した画像を表示、0であれば表示しない　という関数
 function updateImageDisplay(range, elementId) {
@@ -116,7 +132,7 @@ function updateImageDisplay(range, elementId) {
         const imageElement = document.getElementById(elementId);
         // セルの値が "1" であれば画像を表示
         if (value === "1") {
-            imageElement.style.display = 'block';
+            imageElement.style.display = ' inline-block';
         } else {
             imageElement.style.display = 'none';
         }
@@ -135,70 +151,67 @@ function displayUniversity(range,elementId){
         })
         .catch(error => {
             // console.error('Error fetching data:', error);
-            document.getElementById(elementId).innerText = '関数内でのエラー';
-            return "関数内でのエラー";
+            document.getElementById(elementId).innerText = 'now_loading...';
+            return "now_loading...";
         });
 }
-// パンケーキを入手した個数表示するコード のデバッグ
-// async function pineValueLeft() {
-//     const pineValueLeft = parseInt(await fetchData(pineNumberLeft, "pineNumberCellLeft"), 10);
-//     console.log(pineValueLeft);
-// }
-// pineValueLeft();
-// 関数を呼び出して実行します
-// pineValueLeft.then((result) => {
-//     console.log(result); // これが "3" を出力します
-//   });
-
+// いろいろ取得する
 async function updateObjects() {
     try {
         // fetchData を待ち、その結果を整数に変換
-        const dataPineLeft = await fetchData(pineNumberLeft, "pineNumberCellLeft");
-        const dataPineRight= await fetchData(pineNumberRight,"pineNumberCellRight")
+        const dataPineLeft = await fetchData(sheetData[6], "pineNumberCellLeft");
+        const dataPineRight= await fetchData(sheetData[7],"pineNumberCellRight");
         pineValueLeft = parseInt(dataPineLeft, 10);
+        console.log(pineValueLeft);
         pineValueRight=parseInt(dataPineRight,10);
+        console.log(pineValueRight);
 
-        const dataChocoLeft = await fetchData(chocoNumberLeft, "chocoNumberCellLeft");
-        const dataChocoRight= await fetchData(chocoNumberRight,"chocoNumberCellRight")
+        const dataChocoLeft = await fetchData(sheetData[8]  , "chocoNumberCellLeft");
+        const dataChocoRight= await fetchData(sheetData[9]  ,"chocoNumberCellRight");
         chocoValueLeft = parseInt(dataChocoLeft, 10);
+        console.log(chocoValueLeft);
         chocoValueRight=parseInt(dataChocoRight,10);
+        console.log(chocoValueRight);
 
-        const dataBreadLeft = await fetchData(breadNumberLeft, "breadNumberCellLeft");
-        const dataBreadRight= await fetchData(breadNumberRight,"breadNumberCellRight")
+        const dataBreadLeft = await fetchData(sheetData[10]  , "breadNumberCellLeft");
+        const dataBreadRight= await fetchData(sheetData[11]  ,"breadNumberCellRight");
         breadValueLeft = parseInt(dataBreadLeft, 10);
+        console.log(breadValueLeft);
         breadValueRight=parseInt(dataBreadRight,10);
+        console.log(breadValueRight);
 
     } catch (error) {
         console.error('Error:', error);
     }
-    pine1.style.display="block";
-    pine2.style.display="block";
-    pine3.style.display="block";
-    pine4.style.display="block";
-    pine5.style.display="block";
-    pine6.style.display="block";
-    pine7.style.display="block";
-    pine8.style.display="block";
-    pine9.style.display="block";
-    pine10.style.display="block";
 
-    choco1.style.display-"block";
-    choco2.style.display-"block";
-    choco3.style.display-"block";
-    choco4.style.display-"block";
-    choco5.style.display-"block";
-    choco6.style.display-"block";
-    choco7.style.display-"block";
-    choco8.style.display-"block";
-    choco9.style.display-"block";
-    choco10.style.display-"block";
+    pine1.style.display=" inline-block";
+    pine2.style.display=" inline-block";
+    pine3.style.display=" inline-block";
+    pine4.style.display=" inline-block";
+    pine5.style.display=" inline-block";
+    pine6.style.display=" inline-block";
+    pine7.style.display=" inline-block";
+    pine8.style.display=" inline-block";
+    pine9.style.display=" inline-block";
+    pine10.style.display=" inline-block";
 
-    bread1.style.display="block";
-    bread2.style.display="block";
-    bread3.style.display="block";
-    bread4.style.display="block";
-    bread5.style.display="block";
-    bread6.style.display="block";
+    choco1.style.display=" inline-block";
+    choco2.style.display=" inline-block";
+    choco3.style.display=" inline-block";
+    choco4.style.display=" inline-block";
+    choco5.style.display=" inline-block";
+    choco6.style.display=" inline-block";
+    choco7.style.display=" inline-block";
+    choco8.style.display=" inline-block";
+    choco9.style.display=" inline-block";
+    choco10.style.display=" inline-block";
+
+    bread1.style.display=" inline-block";
+    bread2.style.display=" inline-block";
+    bread3.style.display=" inline-block";
+    bread4.style.display=" inline-block";
+    bread5.style.display=" inline-block";
+    bread6.style.display=" inline-block";
 
 
     // 左側のパイン
@@ -241,7 +254,7 @@ async function updateObjects() {
         pine7.style.display="none";
         pine8.style.display="none";
         pine9.style.display="none";
-        pine.style.display="none";
+        pine10.style.display="none";
     }else if(pineValueRight===0){
         pine5.style.display="none";
         pine7.style.display="none";
@@ -289,7 +302,7 @@ async function updateObjects() {
         choco7.style.display="none";
         choco8.style.display="none";
         choco9.style.display="none";
-        choco.style.display="none";
+        choco10.style.display="none";
     }else if(chocoValueRight===0){
         choco5.style.display="none";
         choco7.style.display="none";
@@ -315,114 +328,69 @@ async function updateObjects() {
     if (breadValueRight===3){
         ;
     }else if(breadValueRight===2){
-        bread3.style.display="none";
+        bread6.style.display="none";
     }else if(breadValueRight===1){
-        bread3.style.display="none";
-        bread2.style.display="none";
+        bread5.style.display="none";
+        bread4.style.display="none";
     }else if(breadValueRight===0){
-        bread3.style.display="none";
-        bread2.style.display="none";
-        bread1.style.display="none";
+        bread6.style.display="none";
+        bread5.style.display="none";
+        bread4.style.display="none";
     }
 }
 
-// async function updateObjects() {
-//     try {
-//         // fetchData を待ち、その結果を整数に変換
-//         const dataPineLeft = await fetchData(pineNumberLeft, "pineNumberCellLeft");
-//         const dataPineRight= await fetchData(pineNumberRight,"pineNumberCellRight")
-//         pineValueLeft = parseInt(dataPineLeft, 10);
-//         pineValueRight=parseInt(dataPineRight,10);
-
-//         const dataChocoLeft = await fetchData(chocoNumberLeft, "chocoNumberCellLeft");
-//         const dataChocoRight= await fetchData(chocoNumberRight,"chocoNumberCellRight")
-//         chocoValueLeft = parseInt(dataChocoLeft, 10);
-//         chocoValueRight=parseInt(dataChocoRight,10);
-
-//         const dataBreadLeft = await fetchData(breadNumberLeft, "breadNumberCellLeft");
-//         const dataBreadRight= await fetchData(breadNumberRight,"breadNumberCellRight")
-//         breadValueLeft = parseInt(dataBreadLeft, 10);
-//         breadValueRight=parseInt(dataBreadRight,10);
-
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-
-//     // 全ての要素を安全に取得
-//     const elements = {
-//         pine: [
-//             document.getElementById("pine1"), document.getElementById("pine2"), document.getElementById("pine3"),
-//             document.getElementById("pine4"), document.getElementById("pine5"), document.getElementById("pine6"),
-//             document.getElementById("pine7"), document.getElementById("pine8"), document.getElementById("pine9"),
-//             document.getElementById("pine10")
-//         ],
-//         choco: [
-//             document.getElementById("choco1"), document.getElementById("choco2"), document.getElementById("choco3"),
-//             document.getElementById("choco4"), document.getElementById("choco5"), document.getElementById("choco6"),
-//             document.getElementById("choco7"), document.getElementById("choco8"), document.getElementById("choco9"),
-//             document.getElementById("choco10")
-//         ],
-//         bread: [
-//             document.getElementById("bread1"), document.getElementById("bread2"), document.getElementById("bread3"),
-//             document.getElementById("bread4"), document.getElementById("bread5"), document.getElementById("bread6")
-//         ]
-//     };
-
-//     // 取得した各要素が存在するか確認しつつ、表示をリセット
-//     Object.values(elements).forEach(group => {
-//         group.forEach(el => {
-//             if (el) el.style.display = "block";
-//         });
-//     });
-
-//     // 各カテゴリの表示を更新
-//     function updateCategoryDisplay(values, group) {
-//         for (let i = values; i < group.length; i++) {
-//             if (group[i]) group[i].style.display = "none";
-//         }
-//     }
-
-//     // 左右のパイン、チョコ、パンケーキの表示を更新
-//     updateCategoryDisplay(pineValueLeft, elements.pine.slice(0, 5));
-//     updateCategoryDisplay(pineValueRight, elements.pine.slice(5, 10));
-//     updateCategoryDisplay(chocoValueLeft, elements.choco.slice(0, 5));
-//     updateCategoryDisplay(chocoValueRight, elements.choco.slice(5, 10));
-//     updateCategoryDisplay(breadValueLeft, elements.bread.slice(0, 3));
-//     updateCategoryDisplay(breadValueRight, elements.bread.slice(3, 6));
-// }
-   
 
 
 // ここで本体表示
-fetchData(leftSum, 'point1');
-fetchData(rightSum, 'point2');
-updateImageDisplay(turnLeftBon,"bon1");
-updateImageDisplay(turnRightBon,"bon2");
-updateImageDisplay(turnLeft,"check1");
-updateImageDisplay(turnRight,"check2");
-displayUniversity(leftUniversityCell,"leftUniversity");
-displayUniversity(rightUniversityCell,"rightUniversity");
+// fetchData(sheetData[0] , 'point1');
+// fetchData(sheetData[1], 'point2');
+updateImageDisplay(sheetData[4],"bon1");
+updateImageDisplay(sheetData[5] ,"bon2");
+updateImageDisplay(sheetData[2] ,"check1");
+updateImageDisplay(sheetData[3] ,"check2");
+displayUniversity(sheetData[12] ,"leftUniversity");
+displayUniversity(sheetData[13] ,"rightUniversity");
 updateObjects();
 
-// setInterval(() => {
-//     fetchData(rightSum, 'point1');
-//     fetchData(leftSum, 'point2');
-//     updateImageDisplay(turnLeftBon,"bon1");
-//     updateImageDisplay(turnRightBon,"bon2");
-//     updateImageDisplay(turnLeft,"check1");
-//     updateImageDisplay(turnRight,"check2");
-//     displayUniversity(leftUniversityCell,"leftUniversity");
-//     displayUniversity(rightUniversityCell,"rightUniversity");
-//     updateObjects();
-// }, 10000);
+
+// setInterval(async () => {
+//     await fetchData(sheetData[0]  , 'point1');
+//     await fetchData(sheetData[1] , 'point2');
+//     updateImageDisplay(sheetData[4] ,"bon1");
+//     updateImageDisplay(sheetData[5] ,"bon2");
+//     updateImageDisplay(sheetData[2] ,"check1");
+//     updateImageDisplay(sheetData[3] ,"check2");
+//     await updateObjects();
+// }, 5000);
+
+// setInterval(async () => {
+//     try {
+//         // データの取得
+//         await fetchData(sheetData[0], 'point1');
+//         await fetchData(sheetData[1], 'point2');
+//         updateImageDisplay(sheetData[4], "bon1");
+//         updateImageDisplay(sheetData[5], "bon2");
+//         updateImageDisplay(sheetData[2], "check1");
+//         updateImageDisplay(sheetData[3], "check2");
+        
+//         // オブジェクトの更新
+//         await updateObjects();
+//     } catch (error) {
+//         console.error('Interval error:', error);
+//     }
+// }, 4000);
+
 setInterval(async () => {
-    await fetchData(rightSum, 'point1');
-    await fetchData(leftSum, 'point2');
-    updateImageDisplay(turnLeftBon, "bon1");
-    updateImageDisplay(turnRightBon, "bon2");
-    updateImageDisplay(turnLeft, "check1");
-    updateImageDisplay(turnRight, "check2");
-    await updateObjects();
-}, 2000);
-displayUniversity(leftUniversityCell, "leftUniversity");
-displayUniversity(rightUniversityCell, "rightUniversity");
+    console.log('Interval triggered'); // インターバルが発火したことをログで確認
+    try {
+        await fetchData(sheetData[0], 'point1');
+        await fetchData(sheetData[1], 'point2');
+        await updateImageDisplay(sheetData[4], "bon1");
+        await updateImageDisplay(sheetData[5], "bon2");
+        await updateImageDisplay(sheetData[2], "check1");
+        await updateImageDisplay(sheetData[3], "check2");
+        await updateObjects(); // 正しく await されていることを確認
+    } catch (error) {
+        console.error('Interval error:', error);
+    }
+}, 15000);

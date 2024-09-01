@@ -1,63 +1,37 @@
-#display{
+/* #display{
     position:relative;
+} */
+#container {
+    position: relative;
 }
-#chocoContainerLeft{
+#leftContainter{
+    position:absolute;
     transform:scale(0.085);
-    position:absolute;
-    white-space: nowrap; /*子要素が折り返さないようにする */
-    overflow: hidden; 
-    top:-450px;
-    left:-3650px;
+    top:auto;
+    left:auto;
 }
-#chocoContainerRight{
+#rightContainer{
+    position:absolute;
     transform:scale(0.085);
-    position:absolute;
-    white-space: nowrap; /* 子要素が折り返さないようにする */
-    overflow: hidden;
-    top:-450px;
-    left:-2430px;
+    top:auto;
+    left:auto;
 }
-/* pineleftの子要素 */
-#pineContainerLeft{
-    transform:scale(0.12);
-    position:absolute;
-    top:-280px;
-    left:-2350px;
-    white-space: nowrap; /* 子要素が折り返さないようにする */
-    overflow: hidden;
-}
-#pineContainerRight{
-    position:absolute;
-    transform:scale(0.12);
-    position:absolute;
-    white-space: nowrap; /* 子要素が折り返さないようにする */
-    overflow: hidden;
-    top:-280px;
-    left:-1120px;
-}
-#breadContainerLeft{
-    transform:scale(0.12);
-    position:absolute;
-    white-space: nowrap; /* 子要素が折り返さないようにする */
-    overflow: hidden;
-    top:-120px;
-    left:-1420px;
-}
-#breadContainerRight{
-    transform:scale(0.12);
-    position:absolute;
-    white-space: nowrap; /* 子要素が折り返さないようにする */
-    overflow: hidden;
-    top:-120px;
-    left:-170px;
-}
+
+
+
+
+
 #bon1{
     position:absolute;
-    transform:scale(0.2);
+    transform:scale(0.6);
+    top:130px;
+    left:-300px;
 }
 #bon2{
     position:absolute;
-    transform:scale(0.2);
+    transform:scale(0.6);
+    top:130px;
+    left:00px;
 }
 #check1{
     position:absolute;
