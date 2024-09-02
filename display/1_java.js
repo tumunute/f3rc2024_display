@@ -13,7 +13,7 @@ const pine7=document.getElementById("pine7");
 const pine8=document.getElementById("pine8");
 const pine9=document.getElementById("pine9");
 const pine10=document.getElementById("pine10");
-// const pineNumberCellLeft=document.getElementById("pineNumberCellLeft");
+const pineNumberCellLeft=document.getElementById("pineNumberCellLeft");
 const pineNumberCellRight=document.getElementById("pineNumberCellRight");
 // チョコレート
 const choco1=document.getElementById("choco1");
@@ -60,22 +60,43 @@ const rightUniversity=document.getElementById("rightUniversity");
 // スプシで取得した範囲
 const sheetId = '1mzq8dD3eU-CaZxN-gWO1JmFkO3Jht_C3YSY_W-lzrFs';
 // const sheetData="original_sheet!G32:G45"
-const sheetData = [
-    "original_sheet!G32",
-    "original_sheet!G33",
-    "original_sheet!G34",
-    "original_sheet!G35",
-    "original_sheet!G36",
-    "original_sheet!G37",
-    "original_sheet!G38",
-    "original_sheet!G39",
-    "original_sheet!G40",
-    "original_sheet!G41",
-    "original_sheet!G42",
-    "original_sheet!G43",
-    "original_sheet!G44",
-    "original_sheet!G45",
-];
+// const sheetData = [
+//     "original_sheet!G32",
+//     "original_sheet!G33",
+//     "original_sheet!G34",
+//     "original_sheet!G35",
+//     "original_sheet!G36",
+//     "original_sheet!G37",
+//     "original_sheet!G38",
+//     "original_sheet!G39",
+//     "original_sheet!G40",
+//     "original_sheet!G41",
+//     "original_sheet!G42",
+//     "original_sheet!G43",
+//     "original_sheet!G44",
+//     "original_sheet!G45",
+// ];
+
+// 範囲指定でデータを取得
+const range = "original_sheet!G32:G46";
+
+// 取得したデータを配列に変換する関数
+function convertRangeToArray(rangeData) {
+    const startRow = 32;
+    const endRow = 46;
+    const sheetName = "original_sheet";
+    const sheetData = [];
+
+    for (let i = startRow; i <= endRow; i++) {
+        sheetData.push(`${sheetName}!G${i}`);
+    }
+
+    return sheetData;
+}
+
+// 例として、範囲データを配列に変換
+const sheetData = convertRangeToArray(range);
+console.log(sheetData);
 
 // const leftSum = 'original_sheet!L12';//0
 // const rightSum = 'original_sheet!L26';//1
@@ -94,6 +115,9 @@ const sheetData = [
 
 
 const apiKey = 'AIzaSyCycowG3GCqzemN0Pd7bXa2fA6Qpkw2Kx0';
+const apiKey2="AIzaSyD_fY5H4XDQp5QF9LiElBRhG1VI-m3HffM";
+const apiKey3="AIzaSyDfu_XrGz2SaA-kOg-v_0cGRMH8Xv8wzmQ";
+const apiKey4="AIzaSyBC8bPgWQbFa2Z6f8lJ44zpz6XzOHBKz24";
 
 
 async function fetchData(range, elementId) {
@@ -122,8 +146,59 @@ async function fetchData(range, elementId) {
     }
 }
 
-console.log(fetchData(sheetData[0], 'point1'));
-fetchData(sheetData[1], 'point2');
+async function fetchData2(range, elementId) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey2}`;
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (!data.values || data.values.length === 0) {
+            throw new Error('指定した範囲にデータが存在しません。');
+        }
+
+        const cellValue = data.values[0][0];
+        localStorage.setItem(elementId, cellValue);
+        document.getElementById(elementId).innerText = cellValue;
+
+        return cellValue;
+    } catch (error) {
+        console.error('データ取得エラー:', error);
+        document.getElementById(elementId).innerText = '---';
+        return "---";
+    }
+}
+
+
+
+// async function fetchData4(range, elementId) {
+//     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey4}`;
+    
+//     try {
+//         const response = await fetch(url);
+//         if (!response.ok) {
+//             throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+//         }
+//         const data = await response.json();
+
+//         if (!data.values || data.values.length === 0) {
+//             throw new Error('指定した範囲にデータが存在しません。');
+//         }
+
+//         const cellValue = data.values[0][0];
+//         localStorage.setItem(elementId, cellValue);
+//         document.getElementById(elementId).innerText = cellValue;
+
+//         return cellValue;
+//     } catch (error) {
+//         console.error('データ取得エラー:', error);
+//         document.getElementById(elementId).innerText = '---';
+//         return "---";
+//     }
+// }
 
 // スプシで取得した0か1の値に対して、1であれば指定した画像を表示、0であれば表示しない　という関数
 function updateImageDisplay(range, elementId) {
@@ -155,6 +230,7 @@ function displayUniversity(range,elementId){
             return "now_loading...";
         });
 }
+
 // いろいろ取得する
 async function updateObjects() {
     try {
@@ -256,7 +332,7 @@ async function updateObjects() {
         pine9.style.display="none";
         pine10.style.display="none";
     }else if(pineValueRight===0){
-        pine5.style.display="none";
+        pine6.style.display="none";
         pine7.style.display="none";
         pine8.style.display="none";
         pine9.style.display="none";
@@ -304,7 +380,7 @@ async function updateObjects() {
         choco9.style.display="none";
         choco10.style.display="none";
     }else if(chocoValueRight===0){
-        choco5.style.display="none";
+        choco6.style.display="none";
         choco7.style.display="none";
         choco8.style.display="none";
         choco9.style.display="none";
@@ -342,8 +418,8 @@ async function updateObjects() {
 
 
 // ここで本体表示
-// fetchData(sheetData[0] , 'point1');
-// fetchData(sheetData[1], 'point2');
+fetchData(sheetData[0] , 'point1');
+fetchData(sheetData[1], 'point2');
 updateImageDisplay(sheetData[4],"bon1");
 updateImageDisplay(sheetData[5] ,"bon2");
 updateImageDisplay(sheetData[2] ,"check1");
@@ -393,4 +469,31 @@ setInterval(async () => {
     } catch (error) {
         console.error('Interval error:', error);
     }
-}, 15000);
+    document.getElementById("chocoNumberCellLeft").innerText="";
+    document.getElementById("chocoNumberCellRight").innerText="";
+    document.getElementById("pineNumberCellLeft").innerText="";
+    document.getElementById("pineNumberCellRight").innerText="";
+    document.getElementById("breadNumberCellLeft").innerText="";
+    document.getElementById("breadNumberCellRight").innerText="";
+}, 8000);
+
+
+
+const time=new Date();
+const goalTime=time.getTime();
+console.log(goalTime);
+
+const futureTime=goalTime+180
+    setInterval(()=>{
+        const nowTime2=new Date();
+        const nowTime=nowTime2.getTime();
+        const keika=-futureTime+nowTime;
+        const nokori=180-(Math.round(keika/1000))
+        
+        const minutes = Math.floor(nokori/ 60); // 150を60で割って整数部分を取得
+        const seconds = nokori % 60; // 150を60で割ったあまりを取得
+
+        const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`; // 秒が一桁の場合、先頭に0を追加
+        console.log(timeString); // 出力: "2:30"
+        document.getElementById("timer").innerText=timeString;
+    },1000)

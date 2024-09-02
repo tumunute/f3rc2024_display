@@ -49,7 +49,7 @@ fetchData(sheetData[0], 'point1');
 fetchData(sheetData[1], 'point2');
 
 const sheetData2="original_sheet!G32:G45"
-console.log(typeOf(sheetData2));
+console.log(sheetData2);
 
 
 // データを取得する関数

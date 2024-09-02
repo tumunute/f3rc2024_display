@@ -1,37 +1,90 @@
 /* #display{
     position:relative;
 } */
-#container {
-    position: relative;
+#display {
+    position: static;
+    width:1920px;
+    height:1080px;
 }
-#leftContainter{
+#pineContainerLeft{
+    display:flex;
+    justify-content: left;
     position:absolute;
     transform:scale(0.085);
-    top:auto;
-    left:auto;
+    height:1000px;
+    width:2000px;
+    /* background-color: red; */
+    top:-250px;
+    left:-900px;
 }
-#rightContainer{
+#chocoContainerLeft{
+    display:flex;
+    justify-content: left;
     position:absolute;
     transform:scale(0.085);
-    top:auto;
-    left:auto;
+    height:1000px;
+    width:2000px;
+    /* background-color: red; */
+    top:-80px;
+    left:-900px;
 }
-
-
-
+#breadContainerLeft{
+    display:flex;
+    justify-content: left;
+    position:absolute;
+    transform:scale(0.085);
+    height:1000px;
+    width:2000px;
+    /* background-color: red; */
+    top:-420px;
+    left:-900px;
+}
+#pineContainerRight{
+    display:flex;
+    justify-content: left;
+    position:absolute;
+    transform:scale(0.085);
+    height:1000px;
+    width:2000px;
+    /* background-color: blue; */
+    top:-250px;
+    left:340px;
+}
+#chocoContainerRight{
+    display:flex;
+    justify-content: left;
+    position:absolute;
+    transform:scale(0.085);
+    height:1000px;
+    width:2000px;
+    /* background-color: blue; */
+    top:-70px;
+    left:340px;
+}
+#breadContainerRight{
+    display:flex;
+    justify-content: left;
+    position:absolute;
+    transform:scale(0.085);
+    height:1000px;
+    width:2000px;
+    /* background-color: blue; */
+    top:-420px;
+    left:340px;
+}
 
 
 #bon1{
     position:absolute;
     transform:scale(0.6);
-    top:130px;
-    left:-300px;
+    top:100px;
+    left:-350px;
 }
 #bon2{
     position:absolute;
     transform:scale(0.6);
-    top:130px;
-    left:00px;
+    top:100px;
+    left:700px;
 }
 #check1{
     position:absolute;
@@ -67,4 +120,12 @@
     transform:translate(-50%, -50%) scale(25);
     top:700px;
     left:1450px;   
+}
+
+#timer{
+    font:bolder;
+    transform:scale(15);
+    position:absolute;
+    top:100px;
+    left:960px;
 }
