@@ -124,6 +124,7 @@
 
 #timer{
     font:bolder;
+    font-family:serif;
     transform:scale(15);
     position:absolute;
     top:100px;
