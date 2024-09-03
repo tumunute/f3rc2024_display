@@ -99,6 +99,7 @@
     transform:translate(-50%, -50%) scale(5);
     left:470px;
     top:1000px;
+    writing-mode: horizontal-tb;
 }
 
 #rightUniversity{
@@ -106,6 +107,7 @@
     transform:translate(-50%, -50%) scale(5);
     left:1450px;
     top:1000px;
+    writing-mode: horizontal-tb;
 }
 #point1{
     

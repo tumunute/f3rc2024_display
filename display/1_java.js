@@ -659,9 +659,7 @@ async function startTimer() {
             } else {
                 document.getElementById("timer").innerText = "finish!!";
             }
-        } else if (value==="6"){
-            ;
-        } else{
+        }  else{
             console.log("タイマーは進行しません");
         }
     }, 1000)
