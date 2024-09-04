@@ -613,12 +613,18 @@ async function startTimer() {
     let nokori = 188; // 180秒（3分）
     let settingNokori = 61;
     let countdown = 8;
+    let setting_flag = false;
+    let regulation_flag = false;
     setInterval(async () => {
         const value = await fetchSpreadsheetValue(sheetData[14]);
         console.log(value);
         if (value === "1") {
             document.getElementById("timer").innerText = "set";
         } else if (value === "2") {
+            if (!setting_flag) {
+                settingNokori = 61;
+                setting_flag = true;
+            }
             settingNokori -= 1;
             const minutes = Math.floor(settingNokori / 60);
             const seconds = settingNokori % 60;
@@ -636,7 +642,12 @@ async function startTimer() {
         } else if (value === "4") {
             document.getElementById("timer").innerText = "ready";
         } else if (value ==="5") {
-            countdown =countdown- 1;
+            if (!regulation_flag) {
+                nokori = 188;
+                countdown = 8;
+                regulation_flag = true;
+            }
+            countdown -= 1;
             nokori -= 1;
 
             console.log(countdown);
@@ -648,26 +659,23 @@ async function startTimer() {
             console.log(timeString);
 
 
-            if (countdown > 4) {
-                // 何もしない
-            } else if (countdown < 5 && countdown > 0) {
-                if (countdown===3){
+            if (countdown < 6 && countdown > 0) {
+                if (countdown===2){
                     document.getElementById("timer").innerText = countdown;
                     music.play();
-                }else{
-                document.getElementById("timer").innerText = countdown;
                 }
+                document.getElementById("timer").innerText = countdown;
             }else if(countdown<1 && nokori>177){
-                document.getElementById("timer").innerText = "go！";
+                document.getElementById("timer").innerText = "go!";
                 console.log(countdown<1 && nokori>177);
             }else if (nokori > 0 && nokori < 178) {
-                if(nokori===2){
+                if (nokori===2){
                     document.getElementById("timer").innerText = timeString;
                     music.play();
                 }else{
-                    document.getElementById("timer").innerText = timeString;
+                document.getElementById("timer").innerText = timeString;
                 }
-            } else {
+            } else if (nokori < 1) {
                 document.getElementById("timer").innerText = "finish!!";
             }
         }  else{
@@ -675,7 +683,7 @@ async function startTimer() {
         }
 
         // タイマー停止時のリセット
-        if (setting_flag && value != "2" && value != "3") {
+        if (setting_flag && value != "2" ) {
             setting_flag = false
         } else if (regulation_flag && value != "5") {
             regulation_flag = false
@@ -683,7 +691,6 @@ async function startTimer() {
         prev_value = value
     }, 1000)
 };
-
 
 
 startTimer();
