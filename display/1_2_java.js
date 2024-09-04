@@ -80,17 +80,6 @@ function convertRangeToArray(rangeData) {
 
 // 例として、範囲データを配列に変換
 const sheetData = convertRangeToArray(range);
-console.log(sheetData);
-
-
-const apiKeys = [
-    'AIzaSyCycowG3GCqzemN0Pd7bXa2fA6Qpkw2Kx0',
-    'AIzaSyD3Uqdnk5FWJc9fEaAd97uFfy40NMguLF4',
-    'AIzaSyAsrBi3RNeTrU3lS_8Z9BbXqbUvmr9QxyA',
-    'AIzaSyBG9vWU7wU5a2ZVqxb_p3zgveML_mRjnb0',
-    "AIzaSyA9lVXZhi4zij1WelXRilJelHr5c-zSSeU"
-];
-
 
 
 async function fetchData1(range, elementId) {
@@ -443,156 +432,7 @@ async function fetchSpreadsheetValue(range) {
     return data.values[0][0]; // 取得した値を返す（例：1か0）
 }
 
-// // タイマーを制御する関数
-// async function startTimer() {
-//     let nokori = 188; // 180秒（3分）
-//     let settingNokori=60;
-//     let countdown=8;
-//     setInterval(async () => {
-//         const value = await fetchSpreadsheetValue(sheetData[14]);
-//         console.log(value);
-//         if (value ===0){
-//             //
-//         }else if(value===1){
-//             document.getElementById("timer").innerText = "セッティング";
-//         }else if(value===2){
-//             settingNokori=settingNokori-1;
-//             const minutes = Math.floor(nokori / 60);
-//             const seconds = nokori % 60;
 
-//             const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-//             console.log(timeString);
-
-//             if (settingNokori > 0) {
-//                 document.getElementById("timer").innerText = timeString;
-//             } else {
-//                 document.getElementById("timer").innerText = "0:00";
-//             }
-//         }else if(value===3){
-//             document.getElementById("timer").innerText = "stop";
-//         }else if(value===4){
-//             document.getElementById("timer").innerText = "ready";
-//         }else if(value===5){
-//             countdown=countdown-1;
-//             if (countdown>4){
-//                 ;
-//             }else if(countdown<5 && countdown>0){
-//                 document.getElementById("timer").innerText = countdown;
-//             }
-//         }else if(value===6){
-//             document.getElementById("timer").innerText = "go";
-//             nokori = nokori - 1;
-//             const minutes = Math.floor(nokori / 60);
-//             const seconds = nokori % 60;
-
-//             const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-//             console.log(timeString);
-
-//             if (nokori > 0 && nokori<177) {
-//                 document.getElementById("timer").innerText = timeString;
-//             } else {
-//                 document.getElementById("timer").innerText = "0:00";
-//             }
-//         } else {
-//             console.log("タイマーは進行しません");
-//         }
-//     }, 1000);
-// }
-
-
-// function playAudio() {
-//     var audio = document.getElementById('music');
-//     audio.play();
-// }
-
-
-// async function startTimer() {
-//     let nokori = 188; // 180秒（3分）
-//     let settingNokori = 61;
-//     let countdown = 8;
-//     let setting_flag = false;
-//     let regulation_flag = false;
-//     setInterval(async () => {
-//         const value = await fetchSpreadsheetValue(sheetData[14]);
-//         console.log(value);
-//         if (value === "1") {
-//             document.getElementById("timer").innerText = "set";
-//         } else if (value === "2") {
-//             if (!setting_flag) {
-//                 settingNokori = 61;
-//                 setting_flag = true;
-//             }
-//             settingNokori -= 1;
-//             const minutes = Math.floor(settingNokori / 60);
-//             const seconds = settingNokori % 60;
-
-//             const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-//             console.log(timeString);
-
-//             if (settingNokori > 0) {
-//                 document.getElementById("timer").innerText = timeString;
-//             } else {
-//                 document.getElementById("timer").innerText = "0:00";
-//             }
-//         } else if (value === "3") {
-//             document.getElementById("timer").innerText = "stop";
-//         } else if (value === "4") {
-//             document.getElementById("timer").innerText = "ready";
-//         } else if (value ==="5") {
-//             if (!regulation_flag) {
-//                 nokori = 188;
-//                 countdown = 8;
-//                 regulation_flag = true;
-//             }
-//             countdown -= 1;
-//             nokori -= 1;
-
-//             console.log(countdown);
-//             console.log(nokori);
-            
-//             const minutes = Math.floor(nokori / 60);
-//             const seconds = nokori % 60;
-//             const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-//             console.log(timeString);
-
-
-//             if (countdown < 6 && countdown > 0) {
-//                 if (countdown===3){
-//                     document.getElementById("timer").innerText = countdown;
-//                     playAudio();
-//                     console.log("ここでなるはず");
-//                 }
-//                 document.getElementById("timer").innerText = countdown;
-//             }else if(countdown<1 && nokori>177){
-//                 document.getElementById("timer").innerText = "go!";
-//                 // console.log(countdown<1 && nokori>177);
-//             }else if (nokori > 0 && nokori < 178) {
-//                 if (nokori===3){
-//                     document.getElementById("timer").innerText = timeString;
-//                     playAudio();
-//                     console.log("ここでなるはず");
-//                 }else{
-//                 document.getElementById("timer").innerText = timeString;
-//                 }
-//             } else if (nokori < 1) {
-//                 document.getElementById("timer").innerText = "finish!!";
-//             }
-//         }  else{
-//             console.log("タイマーは進行しません");
-//         }
-
-//         // タイマー停止時のリセット
-//         if (setting_flag && value != "2" ) {
-//             setting_flag = false
-//         } else if (regulation_flag && value != "5") {
-//             regulation_flag = false
-//         }
-//         prev_value = value
-//     }, 1000)
-// };
-
-
-// startTimer();
 
 
 function playAudio() {
@@ -685,3 +525,5 @@ async function startTimer() {
 }
 
 startTimer();
+
+
