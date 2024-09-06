@@ -1,62 +1,62 @@
 
 // 点数
-const point1=document.getElementById("point1");
-const point2=document.getElementById("point2");
+const point1 = document.getElementById("point1");
+const point2 = document.getElementById("point2");
 // パイナップル
-const pine1=document.getElementById("pine1");
-const pine2=document.getElementById("pine2");
-const pine3=document.getElementById("pine3");
-const pine4=document.getElementById("pine4");
-const pine5=document.getElementById("pine5");
-const pine6=document.getElementById("pine6");
-const pine7=document.getElementById("pine7");
-const pine8=document.getElementById("pine8");
-const pine9=document.getElementById("pine9");
-const pine10=document.getElementById("pine10");
-const pineNumberCellLeft=document.getElementById("pineNumberCellLeft");
-const pineNumberCellRight=document.getElementById("pineNumberCellRight");
+const pine1 = document.getElementById("pine1");
+const pine2 = document.getElementById("pine2");
+const pine3 = document.getElementById("pine3");
+const pine4 = document.getElementById("pine4");
+const pine5 = document.getElementById("pine5");
+const pine6 = document.getElementById("pine6");
+const pine7 = document.getElementById("pine7");
+const pine8 = document.getElementById("pine8");
+const pine9 = document.getElementById("pine9");
+const pine10 = document.getElementById("pine10");
+const pineNumberCellLeft = document.getElementById("pineNumberCellLeft");
+const pineNumberCellRight = document.getElementById("pineNumberCellRight");
 // チョコレート
-const choco1=document.getElementById("choco1");
-const choco2=document.getElementById("choco2");
-const choco3=document.getElementById("choco3");
-const choco4=document.getElementById("choco4");
-const choco5=document.getElementById("choco5");
-const choco6=document.getElementById("choco6");
-const choco7=document.getElementById("choco7");
-const choco8=document.getElementById("choco8");
-const choco9=document.getElementById("choco9");
-const choco10=document.getElementById("choco10");
-const chocoNumbercellLeft=document.getElementById("chocoNumberCellLeft");
-const chocoNumbercellRight=document.getElementById("chocoNumberCellRight");
+const choco1 = document.getElementById("choco1");
+const choco2 = document.getElementById("choco2");
+const choco3 = document.getElementById("choco3");
+const choco4 = document.getElementById("choco4");
+const choco5 = document.getElementById("choco5");
+const choco6 = document.getElementById("choco6");
+const choco7 = document.getElementById("choco7");
+const choco8 = document.getElementById("choco8");
+const choco9 = document.getElementById("choco9");
+const choco10 = document.getElementById("choco10");
+const chocoNumbercellLeft = document.getElementById("chocoNumberCellLeft");
+const chocoNumbercellRight = document.getElementById("chocoNumberCellRight");
 
 
 // パンケーキ
-const bread1=document.getElementById("bread1");
-const bread2=document.getElementById("bread2");
-const bread3=document.getElementById("bread3");
-const bread4=document.getElementById("bread4");
-const bread5=document.getElementById("bread5");
-const bread6=document.getElementById("bread6");
-const breadNumberCellLeft=document.getElementById("breadNumberCellLeft");
-const breadNumberCellRight=document.getElementById("breadNumberCellRight");
+const bread1 = document.getElementById("bread1");
+const bread2 = document.getElementById("bread2");
+const bread3 = document.getElementById("bread3");
+const bread4 = document.getElementById("bread4");
+const bread5 = document.getElementById("bread5");
+const bread6 = document.getElementById("bread6");
+const breadNumberCellLeft = document.getElementById("breadNumberCellLeft");
+const breadNumberCellRight = document.getElementById("breadNumberCellRight");
 
 // タイム
-const timer=document.getElementById("timer");
+const timer = document.getElementById("timer");
 
 // ボナペティ
-const bon1=document.getElementById("bon1");
-const bon2=document.getElementById("bon2");
+const bon1 = document.getElementById("bon1");
+const bon2 = document.getElementById("bon2");
 
 // チェック
-const check1=document.getElementById("check1");
-const check2=document.getElementById("check2");
+const check1 = document.getElementById("check1");
+const check2 = document.getElementById("check2");
 
 
 // 左側の大学
-const leftUniversity=document.getElementById("leftUniversity");
-const start=document.getElementById("start");
+const leftUniversity = document.getElementById("leftUniversity");
+const start = document.getElementById("start");
 // 右側の大学
-const rightUniversity=document.getElementById("rightUniversity");
+const rightUniversity = document.getElementById("rightUniversity");
 
 // スプシで取得した範囲
 const sheetId = '1mzq8dD3eU-CaZxN-gWO1JmFkO3Jht_C3YSY_W-lzrFs';
@@ -84,7 +84,7 @@ const sheetData = convertRangeToArray(range);
 
 async function fetchData1(range, elementId) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[0]}`;
-    
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -110,7 +110,7 @@ async function fetchData1(range, elementId) {
 
 async function fetchData2(range, elementId) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[1]}`;
-    
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -136,7 +136,7 @@ async function fetchData2(range, elementId) {
 
 async function fetchData3(range, elementId) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[2]}`;
-    
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -162,7 +162,7 @@ async function fetchData3(range, elementId) {
 
 async function fetchData4(range, elementId) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[5]}`;
-    
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -199,8 +199,7 @@ async function fetchData4(range, elementId) {
 
 // スプシで取得した0か1の値に対して、1であれば指定した画像を表示、0であれば表示しない　という関数
 function updateImageDisplay(range, elementId) {
-    fetchData3(range, elementId).then(value => 
-        {
+    fetchData3(range, elementId).then(value => {
         const imageElement = document.getElementById(elementId);
         // セルの値が "1" であれば画像を表示
         if (value === "1") {
@@ -208,10 +207,10 @@ function updateImageDisplay(range, elementId) {
         } else {
             imageElement.style.display = 'none';
         }
-    });   
+    });
 }
 // 大学の名前を表示する関数
-function displayUniversity(range,elementId){
+function displayUniversity(range, elementId) {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[3]}`;
     fetch(url)
         .then(response => response.json())
@@ -233,196 +232,196 @@ async function updateObjects() {
     try {
         // fetchData を待ち、その結果を整数に変換
         const dataPineLeft = await fetchData1(sheetData[6], "pineNumberCellLeft");
-        const dataPineRight= await fetchData2(sheetData[7],"pineNumberCellRight");
+        const dataPineRight = await fetchData2(sheetData[7], "pineNumberCellRight");
         pineValueLeft = parseInt(dataPineLeft, 10);
         console.log(pineValueLeft);
-        pineValueRight=parseInt(dataPineRight,10);
+        pineValueRight = parseInt(dataPineRight, 10);
         console.log(pineValueRight);
 
-        const dataChocoLeft = await fetchData1(sheetData[8]  , "chocoNumberCellLeft");
-        const dataChocoRight= await fetchData2(sheetData[9]  ,"chocoNumberCellRight");
+        const dataChocoLeft = await fetchData1(sheetData[8], "chocoNumberCellLeft");
+        const dataChocoRight = await fetchData2(sheetData[9], "chocoNumberCellRight");
         chocoValueLeft = parseInt(dataChocoLeft, 10);
         console.log(chocoValueLeft);
-        chocoValueRight=parseInt(dataChocoRight,10);
+        chocoValueRight = parseInt(dataChocoRight, 10);
         console.log(chocoValueRight);
 
-        const dataBreadLeft = await fetchData1(sheetData[10]  , "breadNumberCellLeft");
-        const dataBreadRight= await fetchData2(sheetData[11]  ,"breadNumberCellRight");
+        const dataBreadLeft = await fetchData1(sheetData[10], "breadNumberCellLeft");
+        const dataBreadRight = await fetchData2(sheetData[11], "breadNumberCellRight");
         breadValueLeft = parseInt(dataBreadLeft, 10);
         console.log(breadValueLeft);
-        breadValueRight=parseInt(dataBreadRight,10);
+        breadValueRight = parseInt(dataBreadRight, 10);
         console.log(breadValueRight);
 
     } catch (error) {
         console.error('Error:', error);
     }
 
-    pine1.style.display=" inline-block";
-    pine2.style.display=" inline-block";
-    pine3.style.display=" inline-block";
-    pine4.style.display=" inline-block";
-    pine5.style.display=" inline-block";
-    pine6.style.display=" inline-block";
-    pine7.style.display=" inline-block";
-    pine8.style.display=" inline-block";
-    pine9.style.display=" inline-block";
-    pine10.style.display=" inline-block";
+    pine1.style.display = " inline-block";
+    pine2.style.display = " inline-block";
+    pine3.style.display = " inline-block";
+    pine4.style.display = " inline-block";
+    pine5.style.display = " inline-block";
+    pine6.style.display = " inline-block";
+    pine7.style.display = " inline-block";
+    pine8.style.display = " inline-block";
+    pine9.style.display = " inline-block";
+    pine10.style.display = " inline-block";
 
-    choco1.style.display=" inline-block";
-    choco2.style.display=" inline-block";
-    choco3.style.display=" inline-block";
-    choco4.style.display=" inline-block";
-    choco5.style.display=" inline-block";
-    choco6.style.display=" inline-block";
-    choco7.style.display=" inline-block";
-    choco8.style.display=" inline-block";
-    choco9.style.display=" inline-block";
-    choco10.style.display=" inline-block";
+    choco1.style.display = " inline-block";
+    choco2.style.display = " inline-block";
+    choco3.style.display = " inline-block";
+    choco4.style.display = " inline-block";
+    choco5.style.display = " inline-block";
+    choco6.style.display = " inline-block";
+    choco7.style.display = " inline-block";
+    choco8.style.display = " inline-block";
+    choco9.style.display = " inline-block";
+    choco10.style.display = " inline-block";
 
-    bread1.style.display=" inline-block";
-    bread2.style.display=" inline-block";
-    bread3.style.display=" inline-block";
-    bread4.style.display=" inline-block";
-    bread5.style.display=" inline-block";
-    bread6.style.display=" inline-block";
+    bread1.style.display = " inline-block";
+    bread2.style.display = " inline-block";
+    bread3.style.display = " inline-block";
+    bread4.style.display = " inline-block";
+    bread5.style.display = " inline-block";
+    bread6.style.display = " inline-block";
 
 
     // 左側のパイン
-    if (pineValueLeft===5){
+    if (pineValueLeft === 5) {
         ;
-    }else if (pineValueLeft===4){
-        pine5.style.display="none";
-    }else if (pineValueLeft===3){
-        pine4.style.display="none";
-        pine5.style.display="none";
-    }else if(pineValueLeft===2){
-        pine3.style.display="none";
-        pine4.style.display="none";
-        pine5.style.display="none";
-    }else if(pineValueLeft===1){
-        pine2.style.display="none";
-        pine3.style.display="none";
-        pine4.style.display="none";
-        pine5.style.display="none";
-    }else if(pineValueLeft===0){
-        pine1.style.display="none";
-        pine2.style.display="none";
-        pine3.style.display="none";
-        pine4.style.display="none";
-        pine5.style.display="none";
+    } else if (pineValueLeft === 4) {
+        pine5.style.display = "none";
+    } else if (pineValueLeft === 3) {
+        pine4.style.display = "none";
+        pine5.style.display = "none";
+    } else if (pineValueLeft === 2) {
+        pine3.style.display = "none";
+        pine4.style.display = "none";
+        pine5.style.display = "none";
+    } else if (pineValueLeft === 1) {
+        pine2.style.display = "none";
+        pine3.style.display = "none";
+        pine4.style.display = "none";
+        pine5.style.display = "none";
+    } else if (pineValueLeft === 0) {
+        pine1.style.display = "none";
+        pine2.style.display = "none";
+        pine3.style.display = "none";
+        pine4.style.display = "none";
+        pine5.style.display = "none";
     }
     // 右側のパイン
-    if (pineValueRight===5){
+    if (pineValueRight === 5) {
         ;
-    }else if (pineValueRight===4){
-        pine10.style.display="none";
-    }else if (pineValueRight===3){
-        pine9.style.display="none";
-        pine10.style.display="none";
-    }else if(pineValueRight===2){
-        pine8.style.display="none";
-        pine9.style.display="none";
-        pine10.style.display="none";
-    }else if(pineValueRight===1){
-        pine7.style.display="none";
-        pine8.style.display="none";
-        pine9.style.display="none";
-        pine10.style.display="none";
-    }else if(pineValueRight===0){
-        pine6.style.display="none";
-        pine7.style.display="none";
-        pine8.style.display="none";
-        pine9.style.display="none";
-        pine10.style.display="none";
+    } else if (pineValueRight === 4) {
+        pine10.style.display = "none";
+    } else if (pineValueRight === 3) {
+        pine9.style.display = "none";
+        pine10.style.display = "none";
+    } else if (pineValueRight === 2) {
+        pine8.style.display = "none";
+        pine9.style.display = "none";
+        pine10.style.display = "none";
+    } else if (pineValueRight === 1) {
+        pine7.style.display = "none";
+        pine8.style.display = "none";
+        pine9.style.display = "none";
+        pine10.style.display = "none";
+    } else if (pineValueRight === 0) {
+        pine6.style.display = "none";
+        pine7.style.display = "none";
+        pine8.style.display = "none";
+        pine9.style.display = "none";
+        pine10.style.display = "none";
     }
     // 左側のチョコ
-    if (chocoValueLeft===5){
+    if (chocoValueLeft === 5) {
         ;
-    }else if (chocoValueLeft===4){
-        choco5.style.display="none";
-    }else if (chocoValueLeft===3){
-        choco4.style.display="none";
-        choco5.style.display="none";
-    }else if(chocoValueLeft===2){
-        choco3.style.display="none";
-        choco4.style.display="none";
-        choco5.style.display="none";
-    }else if(chocoValueLeft===1){
-        choco2.style.display="none";
-        choco3.style.display="none";
-        choco4.style.display="none";
-        choco5.style.display="none";
-    }else if(chocoValueLeft===0){
-        choco1.style.display="none";
-        choco2.style.display="none";
-        choco3.style.display="none";
-        choco4.style.display="none";
-        choco5.style.display="none";
+    } else if (chocoValueLeft === 4) {
+        choco5.style.display = "none";
+    } else if (chocoValueLeft === 3) {
+        choco4.style.display = "none";
+        choco5.style.display = "none";
+    } else if (chocoValueLeft === 2) {
+        choco3.style.display = "none";
+        choco4.style.display = "none";
+        choco5.style.display = "none";
+    } else if (chocoValueLeft === 1) {
+        choco2.style.display = "none";
+        choco3.style.display = "none";
+        choco4.style.display = "none";
+        choco5.style.display = "none";
+    } else if (chocoValueLeft === 0) {
+        choco1.style.display = "none";
+        choco2.style.display = "none";
+        choco3.style.display = "none";
+        choco4.style.display = "none";
+        choco5.style.display = "none";
     }
     // 右側のチョコ
-    if (chocoValueRight===5){
+    if (chocoValueRight === 5) {
         ;
-    }else if (chocoValueRight===4){
-        choco10.style.display="none";
-    }else if (chocoValueRight===3){
-        choco9.style.display="none";
-        choco10.style.display="none";
-    }else if(chocoValueRight===2){
-        choco8.style.display="none";
-        choco9.style.display="none";
-        choco10.style.display="none";
-    }else if(chocoValueRight===1){
-        choco7.style.display="none";
-        choco8.style.display="none";
-        choco9.style.display="none";
-        choco10.style.display="none";
-    }else if(chocoValueRight===0){
-        choco6.style.display="none";
-        choco7.style.display="none";
-        choco8.style.display="none";
-        choco9.style.display="none";
-        choco10.style.display="none";
+    } else if (chocoValueRight === 4) {
+        choco10.style.display = "none";
+    } else if (chocoValueRight === 3) {
+        choco9.style.display = "none";
+        choco10.style.display = "none";
+    } else if (chocoValueRight === 2) {
+        choco8.style.display = "none";
+        choco9.style.display = "none";
+        choco10.style.display = "none";
+    } else if (chocoValueRight === 1) {
+        choco7.style.display = "none";
+        choco8.style.display = "none";
+        choco9.style.display = "none";
+        choco10.style.display = "none";
+    } else if (chocoValueRight === 0) {
+        choco6.style.display = "none";
+        choco7.style.display = "none";
+        choco8.style.display = "none";
+        choco9.style.display = "none";
+        choco10.style.display = "none";
     }
     // 左側のパンケーキ
-    if (breadValueLeft===3){
+    if (breadValueLeft === 3) {
         ;
-    }else if(breadValueLeft===2){
-        bread3.style.display="none";
-    }else if(breadValueLeft===1){
-        bread3.style.display="none";
-        bread2.style.display="none";
-    }else if(breadValueLeft===0){
-        bread3.style.display="none";
-        bread2.style.display="none";
-        bread1.style.display="none";
+    } else if (breadValueLeft === 2) {
+        bread3.style.display = "none";
+    } else if (breadValueLeft === 1) {
+        bread3.style.display = "none";
+        bread2.style.display = "none";
+    } else if (breadValueLeft === 0) {
+        bread3.style.display = "none";
+        bread2.style.display = "none";
+        bread1.style.display = "none";
     }
-    
+
     // 右側のパンケーキ
-    if (breadValueRight===3){
+    if (breadValueRight === 3) {
         ;
-    }else if(breadValueRight===2){
-        bread6.style.display="none";
-    }else if(breadValueRight===1){
-        bread5.style.display="none";
-        bread4.style.display="none";
-    }else if(breadValueRight===0){
-        bread6.style.display="none";
-        bread5.style.display="none";
-        bread4.style.display="none";
+    } else if (breadValueRight === 2) {
+        bread6.style.display = "none";
+    } else if (breadValueRight === 1) {
+        bread5.style.display = "none";
+        bread4.style.display = "none";
+    } else if (breadValueRight === 0) {
+        bread6.style.display = "none";
+        bread5.style.display = "none";
+        bread4.style.display = "none";
     }
 }
 
 
 
 // ここで本体表示
-fetchData1(sheetData[0] , 'point1');
+fetchData1(sheetData[0], 'point1');
 fetchData2(sheetData[1], 'point2');
-updateImageDisplay(sheetData[4],"bon1");
-updateImageDisplay(sheetData[5] ,"bon2");
-updateImageDisplay(sheetData[2] ,"check1");
-updateImageDisplay(sheetData[3] ,"check2");
-displayUniversity(sheetData[12] ,"leftUniversity");
-displayUniversity(sheetData[13] ,"rightUniversity");
+updateImageDisplay(sheetData[4], "bon1");
+updateImageDisplay(sheetData[5], "bon2");
+updateImageDisplay(sheetData[2], "check1");
+updateImageDisplay(sheetData[3], "check2");
+displayUniversity(sheetData[12], "leftUniversity");
+displayUniversity(sheetData[13], "rightUniversity");
 updateObjects();
 
 
@@ -440,12 +439,12 @@ setInterval(async () => {
     } catch (error) {
         console.error('Interval error:', error);
     }
-    document.getElementById("chocoNumberCellLeft").innerText="";
-    document.getElementById("chocoNumberCellRight").innerText="";
-    document.getElementById("pineNumberCellLeft").innerText="";
-    document.getElementById("pineNumberCellRight").innerText="";
-    document.getElementById("breadNumberCellLeft").innerText="";
-    document.getElementById("breadNumberCellRight").innerText="";
+    document.getElementById("chocoNumberCellLeft").innerText = "";
+    document.getElementById("chocoNumberCellRight").innerText = "";
+    document.getElementById("pineNumberCellLeft").innerText = "";
+    document.getElementById("pineNumberCellRight").innerText = "";
+    document.getElementById("breadNumberCellLeft").innerText = "";
+    document.getElementById("breadNumberCellRight").innerText = "";
 }, 5000);
 
 
@@ -458,8 +457,6 @@ async function fetchSpreadsheetValue(range) {
 }
 
 
-
-
 function playAudio() {
     var audio = document.getElementById('music');
     audio.play().catch(error => {
@@ -467,75 +464,319 @@ function playAudio() {
     });
 }
 
-async function startTimer() {
-    let nokori = 183; // 180秒（3分）
-    let settingNokori = 61;
-    let countdown = 3;
-    let setting_flag = false;
-    let regulation_flag = false;
-    setInterval(async () => {
+// async function startTimer() {
+//     let nokori = 183; // 180秒（3分）
+//     let settingNokori = 61;
+//     let countdown = 3;
+//     let setting_flag = false;
+//     let regulation_flag = false;
+//     setInterval(async () => {
+//         const value = await fetchSpreadsheetValue(sheetData[14]);
+//         console.log(value);
+//         if (value === "1") {
+//             document.getElementById("timer").innerText = "set";
+//         } else if (value === "2") {
+//             if (!setting_flag) {
+//                 settingNokori = 61;
+//                 setting_flag = true;
+//             }
+
+
+
+//             settingNokori -= 1;
+//             const minutes = Math.floor(settingNokori / 60);
+//             const seconds = settingNokori % 60;
+
+//             const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+//             console.log(timeString);
+
+//             if (settingNokori > 0) {
+//                 document.getElementById("timer").innerText = timeString;
+//             } else {
+//                 document.getElementById("timer").innerText = "0:00";
+//             }
+
+
+
+//         } else if (value === "3") {
+//             document.getElementById("timer").innerText = "stop";
+//         } else if (value === "4") {
+//             document.getElementById("timer").innerText = "ready";
+//         } else if (value === "5") {
+
+
+//             if (!regulation_flag) {
+//                 nokori = 183;
+//                 countdown = 3;
+//                 regulation_flag = true;
+//             }
+//             countdown -= 1;
+//             nokori -= 1;
+
+//             console.log(countdown);
+//             console.log(nokori);
+
+//             const minutes = Math.floor(nokori / 60);
+//             const seconds = nokori % 60;
+//             const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+//             console.log(timeString);
+
+//             if (countdown < 4 && countdown > 0) {
+//                 if (countdown === 3) {
+//                     document.getElementById("timer").innerText = countdown;
+//                     playAudio();
+//                     console.log("ここでなるはず");
+//                 }
+//                 document.getElementById("timer").innerText = countdown;
+//             } else if (countdown < 1 && nokori > 177) {
+//                 document.getElementById("timer").innerText = "GO!";
+//             } else if (nokori > 0 && nokori < 178) {
+//                 if (nokori === 3) {
+//                     document.getElementById("timer").innerText = timeString;
+//                     playAudio();
+//                     console.log("ここでなるはず");
+//                 } else {
+//                     document.getElementById("timer").innerText = timeString;
+//                 }
+//             } else if (nokori < 1) {
+//                 document.getElementById("timer").innerText = "FINISH!";
+//             }
+//         } else {
+//             console.log("タイマーは進行しません");
+//         }
+
+//         // タイマー停止時のリセット
+//         if (setting_flag && value != "2") {
+//             setting_flag = false;
+//         } else if (regulation_flag && value != "5") {
+//             regulation_flag = false;
+//         }
+//     }, 3000);
+// }
+
+// startTimer();
+
+
+
+// let intervalId;
+
+// function startGame() {
+//     let nokori = 183; // 180秒（3分）
+//     // let settingNokori = 61;
+//     let countdown = 3;
+//     let setting_flag = false;
+//     let regulation_flag = false;
+
+//     intervalId = setInterval(() => {
+//         if (!regulation_flag) {
+//             nokori = 183;
+//             countdown = 3;
+//             regulation_flag = true;
+//         }
+//         countdown -= 1;
+//         nokori -= 1;
+
+//         console.log(countdown);
+//         console.log(nokori);
+
+//         const minutes = Math.floor(nokori / 60);
+//         const seconds = nokori % 60;
+//         const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+//         console.log(timeString);
+
+//         if (countdown < 4 && countdown > 0) {
+//             if (countdown === 3) {
+//                 document.getElementById("timer").innerText = countdown;
+//                 playAudio();
+//                 console.log("ここでなるはず");
+//             }
+//             document.getElementById("timer").innerText = countdown;
+//         } else if (countdown < 1 && nokori > 177) {
+//             document.getElementById("timer").innerText = "GO!";
+//         } else if (nokori > 0 && nokori < 178) {
+//             if (nokori === 3) {
+//                 document.getElementById("timer").innerText = timeString;
+//                 playAudio();
+//                 console.log("ここでなるはず");
+//             } else {
+//                 document.getElementById("timer").innerText = timeString;
+//             }
+//         } else if (nokori < 1) {
+//             document.getElementById("timer").innerText = "FINISH!";
+//         } else {
+//             console.log("タイマーは進行しません");
+//         }
+
+//         タイマー停止時のリセット
+//         if (setting_flag && value != "2") {
+//             setting_flag = false;
+//         } else if (regulation_flag && value != "5") {
+//             regulation_flag = false;
+//         }
+//     }, 1000);
+// }
+
+
+
+// function startTimer() {
+//     intervalId = setInterval(async () => {
+//         const value = await fetchSpreadsheetValue(sheetData[14]);
+//         console.log(value);
+//         if (value === "1") {
+//             document.getElementById("timer").innerText = "set";
+//         } else if (value === "2") {
+//             document.getElementById("timer").innerText = "set";
+//             clearInterval(intervalId);
+//             startSetting();
+//         } else if (value === "3") {
+//             document.getElementById("timer").innerText = "stop";
+//         } else if (value === "4") {
+//             document.getElementById("timer").innerText = "ready";
+//         } else if (value === "5") {
+//             clearInterval(intervalId);
+//             startGame();
+//         }
+//     }, 3000);
+// }
+
+
+
+// function startSetting() {
+//     // if (!setting_flag) {
+//     //     settingNokori = 61;
+//     //     setting_flag = true;
+//     // }
+//     let settingNokori=61;
+
+//     intervalId = setInterval(() => {
+//         settingNokori -= 1;
+//         const minutes = Math.floor(settingNokori / 60);
+//         const seconds = settingNokori % 60;
+
+//         const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+//         console.log(timeString);
+
+//         if (settingNokori > 0) {
+//             document.getElementById("timer").innerText = timeString;
+//         } else {
+//             document.getElementById("timer").innerText = "0:00";
+//             clearInterval(intervalId); // タイマーが0になったら停止
+//         }
+//     }, 1000);
+// }
+
+
+
+
+// startTimer();
+
+
+let intervalId;
+let settingIntervalId;
+
+function startTimer() {
+    intervalId = setInterval(async () => {
         const value = await fetchSpreadsheetValue(sheetData[14]);
         console.log(value);
         if (value === "1") {
             document.getElementById("timer").innerText = "set";
+            document.getElementById("timer-ready").innerText = " ";
+            document.getElementById("timer-finish").innerText = " ";
         } else if (value === "2") {
-            if (!setting_flag) {
-                settingNokori = 61;
-                setting_flag = true;
-            }
-            settingNokori -= 1;
-            const minutes = Math.floor(settingNokori / 60);
-            const seconds = settingNokori % 60;
-
-            const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            console.log(timeString);
-
-            if (settingNokori > 0) {
-                document.getElementById("timer").innerText = timeString;
-            } else {
-                document.getElementById("timer").innerText = "0:00";
-            }
-        } else if (value === "3") {
-            document.getElementById("timer").innerText = "stop";
+            document.getElementById("timer").innerText = "set";
+            document.getElementById("timer-ready").innerText = " ";
+            document.getElementById("timer-finish").innerText = " ";
+            clearInterval(intervalId);
+            startSetting();
         } else if (value === "4") {
-            document.getElementById("timer").innerText = "ready";
+            document.getElementById("timer-ready").innerText = "ready";
+            document.getElementById("timer").innerText = " ";
+            document.getElementById("finish").innerText = " ";
         } else if (value === "5") {
-            if (!regulation_flag) {
-                nokori = 183;
-                countdown = 3;
-                regulation_flag = true;
-            }
-            countdown -= 1;
-            nokori -= 1;
+            clearInterval(intervalId);
+            startGame();
+        }
+    }, 1000);
+}
 
-            console.log(countdown);
-            console.log(nokori);
-            
-            const minutes = Math.floor(nokori / 60);
-            const seconds = nokori % 60;
-            const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            console.log(timeString);
+function startSetting() {
+    let settingNokori = 61;
 
-            if (countdown < 4 && countdown > 0) {
-                if (countdown === 3) {
-                    document.getElementById("timer").innerText = countdown;
-                    playAudio();
-                    console.log("ここでなるはず");
-                }
+    settingIntervalId = setInterval(() => {
+        settingNokori -= 1;
+        const minutes = Math.floor(settingNokori / 60);
+        const seconds = settingNokori % 60;
+
+        const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        console.log(timeString);
+
+        if (settingNokori > 0) {
+            document.getElementById("timer").innerText = timeString;
+            document.getElementById("timer-ready").innerText = " ";
+            document.getElementById("timer-finish").innerText = " ";
+            console.log("ここで呼び出されたらセーフセッティング");
+        } else {
+            document.getElementById("timer").innerText = "0:00";
+            clearInterval(settingIntervalId); // タイマーが0になったら停止
+            startTimer(); // 3秒周期のsetIntervalに戻る
+        }
+    }, 1000);
+}
+
+function startGame() {
+    let nokori = 185; // 180秒（3分）
+    let countdown = 5;
+    let setting_flag = false;
+    let regulation_flag = false;
+
+    intervalId = setInterval(() => {
+        // if (!regulation_flag) {
+        //     nokori = 183;
+        //     countdown = 3;
+        //     regulation_flag = true;
+        // }
+        countdown -= 1;
+        nokori -= 1;
+
+        console.log(countdown);
+        console.log(nokori);
+
+        const minutes = Math.floor(nokori / 60);
+        const seconds = nokori % 60;
+        const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        console.log(timeString);
+
+        if (countdown < 6 && countdown > 0) {
+            if (countdown === 3) {
                 document.getElementById("timer").innerText = countdown;
-            } else if (countdown < 1 && nokori > 177) {
-                document.getElementById("timer").innerText = "GO!";
-            } else if (nokori > 0 && nokori < 178) {
-                if (nokori === 3) {
-                    document.getElementById("timer").innerText = timeString;
-                    playAudio();
-                    console.log("ここでなるはず");
-                } else {
-                    document.getElementById("timer").innerText = timeString;
-                }
-            } else if (nokori < 1) {
-                document.getElementById("timer").innerText = "FINISH!";
+                document.getElementById("timer-ready").innerText = " ";
+                document.getElementById("timer-finish").innerText = " ";
+                playAudio();
+                console.log("ここでなるはず");
             }
+            document.getElementById("timer").innerText = countdown;
+        } else if (countdown < 1 && nokori > 177) {
+            document.getElementById("timer").innerText = "GO!";
+            document.getElementById("timer-ready").innerText = " ";
+            document.getElementById("timer-finish").innerText = " ";
+        } else if (nokori > 0 && nokori < 178) {
+            if (nokori === 3) {
+                document.getElementById("timer").innerText = timeString;
+                document.getElementById("timer-ready").innerText = " ";
+            
+                document.getElementById("timer-finish").innerText = " ";
+                playAudio();
+                console.log("ここでなるはず");
+            } else {
+                document.getElementById("timer").innerText = timeString;
+                document.getElementById("timer-ready").innerText = " ";
+                document.getElementById("timer-finish").innerText = " ";
+                console.log("ここで呼び出されてたらセーフスタート");
+            }
+        } else if (nokori < 1) {
+            document.getElementById("timer").innerText = "FINISH!";
+            document.getElementById("timer-ready").innerText = " ";
+            document.getElementById("timer-finish").innerText = " ";
         } else {
             console.log("タイマーは進行しません");
         }
@@ -551,4 +792,4 @@ async function startTimer() {
 
 startTimer();
 
-
+// document.getElementById("timer-finish").innerText = "FINISH!!";

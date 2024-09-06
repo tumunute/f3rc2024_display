@@ -134,3 +134,19 @@
     top:100px;
     left:960px;
 }
+#timer-ready{
+    font:bolder;
+    font-family:sans-serif;
+    transform:scale(10);
+    position:absolute;
+    top:100px;
+    left:960px;
+}
+#timer-finish{
+    font:bolder;
+    font-family:sans-serif;
+    transform:scale(8);
+    position:absolute;
+    top:100px;
+    left:960px;
+}
