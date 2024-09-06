@@ -160,6 +160,31 @@ async function fetchData3(range, elementId) {
     }
 }
 
+async function fetchData4(range, elementId) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[5]}`;
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (!data.values || data.values.length === 0) {
+            throw new Error('指定した範囲にデータが存在しません。');
+        }
+
+        const cellValue = data.values[0][0];
+        localStorage.setItem(elementId, cellValue);
+        document.getElementById(elementId).innerText = cellValue;
+
+        return cellValue;
+    } catch (error) {
+        console.error('データ取得エラー:', error);
+        document.getElementById(elementId).innerText = '---';
+        return "---";
+    }
+}
 // console.log(fetchData1(sheetData[0], 'point1'));
 // console.log(fetchData2(sheetData[0], 'point1'));
 // console.log(fetchData3(sheetData[0], 'point1'));

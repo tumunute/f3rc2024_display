@@ -77,14 +77,14 @@
 
 #bon1{
     position:absolute;
-    transform:scale(0.6);
-    top:100px;
+    transform:scale(0.4);
+    top:180px;
     left:-350px;
 }
 #bon2{
     position:absolute;
-    transform:scale(0.6);
-    top:100px;
+    transform:scale(0.4);
+    top:180px;
     left:700px;
 }
 #check1{
@@ -101,7 +101,7 @@
     left:470px;
     top:1000px;
     writing-mode: horizontal-tb;
-    font:bolder;
+    
 }
 
 #rightUniversity{
@@ -110,7 +110,6 @@
     left:1450px;
     top:1000px;
     writing-mode: horizontal-tb;
-    font:bolder;
 }
 #point1{
     
