@@ -443,9 +443,9 @@ function playAudio() {
 }
 
 async function startTimer() {
-    let nokori = 188; // 180秒（3分）
+    let nokori = 183; // 180秒（3分）
     let settingNokori = 61;
-    let countdown = 8;
+    let countdown = 3;
     let setting_flag = false;
     let regulation_flag = false;
     setInterval(async () => {
@@ -476,8 +476,8 @@ async function startTimer() {
             document.getElementById("timer").innerText = "ready";
         } else if (value === "5") {
             if (!regulation_flag) {
-                nokori = 188;
-                countdown = 8;
+                nokori = 183;
+                countdown = 3;
                 regulation_flag = true;
             }
             countdown -= 1;
@@ -491,7 +491,7 @@ async function startTimer() {
             const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
             console.log(timeString);
 
-            if (countdown < 6 && countdown > 0) {
+            if (countdown < 4 && countdown > 0) {
                 if (countdown === 3) {
                     document.getElementById("timer").innerText = countdown;
                     playAudio();
@@ -499,7 +499,7 @@ async function startTimer() {
                 }
                 document.getElementById("timer").innerText = countdown;
             } else if (countdown < 1 && nokori > 177) {
-                document.getElementById("timer").innerText = "go!";
+                document.getElementById("timer").innerText = "GO!";
             } else if (nokori > 0 && nokori < 178) {
                 if (nokori === 3) {
                     document.getElementById("timer").innerText = timeString;
@@ -509,7 +509,7 @@ async function startTimer() {
                     document.getElementById("timer").innerText = timeString;
                 }
             } else if (nokori < 1) {
-                document.getElementById("timer").innerText = "finish!!";
+                document.getElementById("timer").innerText = "FINISH!";
             }
         } else {
             console.log("タイマーは進行しません");
