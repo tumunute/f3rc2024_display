@@ -55,202 +55,171 @@ const start = document.getElementById("start");
 // 右側の大学
 const rightUniversity = document.getElementById("rightUniversity");
 
-// スプシで取得した範囲
-const sheetId = "1mzq8dD3eU-CaZxN-gWO1JmFkO3Jht_C3YSY_W-lzrFs";
+// // 取得したデータを配列に変換する関数
+// function convertRangeToArray(rangeData) {
+//   const startRow = 32;
+//   const endRow = 48;
+//   const sheetName = "original_sheet";
+//   const sheetData = [];
 
-// 範囲指定でデータを取得
-const range = "original_sheet!G32:G46";
+//   for (let i = startRow; i <= endRow; i++) {
+//     sheetData.push(`${sheetName}!G${i}`);
+//   }
 
-// 取得したデータを配列に変換する関数
-function convertRangeToArray(rangeData) {
-  const startRow = 32;
-  const endRow = 48;
-  const sheetName = "original_sheet";
-  const sheetData = [];
+//   return sheetData;
+// }
 
-  for (let i = startRow; i <= endRow; i++) {
-    sheetData.push(`${sheetName}!G${i}`);
-  }
+// // 例として、範囲データを配列に変換
+// const sheetData = convertRangeToArray(range);
 
-  return sheetData;
-}
+// async function fetchData1(range, elementId) {
+//   const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[0]}`;
 
-// 例として、範囲データを配列に変換
-const sheetData = convertRangeToArray(range);
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+//     }
+//     const data = await response.json();
 
-async function fetchData1(range, elementId) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[0]}`;
+//     if (!data.values || data.values.length === 0) {
+//       throw new Error("指定した範囲にデータが存在しません。");
+//     }
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-    }
-    const data = await response.json();
+//     const cellValue = data.values[0][0];
+//     localStorage.setItem(elementId, cellValue);
+//     document.getElementById(elementId).innerText = cellValue;
 
-    if (!data.values || data.values.length === 0) {
-      throw new Error("指定した範囲にデータが存在しません。");
-    }
+//     return cellValue;
+//   } catch (error) {
+//     console.error("データ取得エラー:", error);
+//     document.getElementById(elementId).innerText = "---";
+//     return "---";
+//   }
+// }
 
-    const cellValue = data.values[0][0];
-    localStorage.setItem(elementId, cellValue);
-    document.getElementById(elementId).innerText = cellValue;
+// async function fetchData2(range, elementId) {
+//   const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[1]}`;
 
-    return cellValue;
-  } catch (error) {
-    console.error("データ取得エラー:", error);
-    document.getElementById(elementId).innerText = "---";
-    return "---";
-  }
-}
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+//     }
+//     const data = await response.json();
 
-async function fetchData2(range, elementId) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[1]}`;
+//     if (!data.values || data.values.length === 0) {
+//       throw new Error("指定した範囲にデータが存在しません。");
+//     }
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-    }
-    const data = await response.json();
+//     const cellValue = data.values[0][0];
+//     localStorage.setItem(elementId, cellValue);
+//     document.getElementById(elementId).innerText = cellValue;
 
-    if (!data.values || data.values.length === 0) {
-      throw new Error("指定した範囲にデータが存在しません。");
-    }
+//     return cellValue;
+//   } catch (error) {
+//     console.error("データ取得エラー:", error);
+//     document.getElementById(elementId).innerText = "---";
+//     return "---";
+//   }
+// }
 
-    const cellValue = data.values[0][0];
-    localStorage.setItem(elementId, cellValue);
-    document.getElementById(elementId).innerText = cellValue;
+// async function fetchData3(range, elementId) {
+//   const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[2]}`;
 
-    return cellValue;
-  } catch (error) {
-    console.error("データ取得エラー:", error);
-    document.getElementById(elementId).innerText = "---";
-    return "---";
-  }
-}
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+//     }
+//     const data = await response.json();
 
-async function fetchData3(range, elementId) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[2]}`;
+//     if (!data.values || data.values.length === 0) {
+//       throw new Error("指定した範囲にデータが存在しません。");
+//     }
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-    }
-    const data = await response.json();
+//     const cellValue = data.values[0][0];
+//     localStorage.setItem(elementId, cellValue);
+//     document.getElementById(elementId).innerText = cellValue;
 
-    if (!data.values || data.values.length === 0) {
-      throw new Error("指定した範囲にデータが存在しません。");
-    }
+//     return cellValue;
+//   } catch (error) {
+//     console.error("データ取得エラー:", error);
+//     document.getElementById(elementId).innerText = "---";
+//     return "---";
+//   }
+// }
 
-    const cellValue = data.values[0][0];
-    localStorage.setItem(elementId, cellValue);
-    document.getElementById(elementId).innerText = cellValue;
+// async function fetchData4(range, elementId) {
+//   const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[5]}`;
 
-    return cellValue;
-  } catch (error) {
-    console.error("データ取得エラー:", error);
-    document.getElementById(elementId).innerText = "---";
-    return "---";
-  }
-}
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+//     }
+//     const data = await response.json();
 
-async function fetchData4(range, elementId) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[5]}`;
+//     if (!data.values || data.values.length === 0) {
+//       throw new Error("指定した範囲にデータが存在しません。");
+//     }
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-    }
-    const data = await response.json();
+//     const cellValue = data.values[0][0];
+//     localStorage.setItem(elementId, cellValue);
+//     document.getElementById(elementId).innerText = cellValue;
 
-    if (!data.values || data.values.length === 0) {
-      throw new Error("指定した範囲にデータが存在しません。");
-    }
-
-    const cellValue = data.values[0][0];
-    localStorage.setItem(elementId, cellValue);
-    document.getElementById(elementId).innerText = cellValue;
-
-    return cellValue;
-  } catch (error) {
-    console.error("データ取得エラー:", error);
-    document.getElementById(elementId).innerText = "---";
-    return "---";
-  }
-}
+//     return cellValue;
+//   } catch (error) {
+//     console.error("データ取得エラー:", error);
+//     document.getElementById(elementId).innerText = "---";
+//     return "---";
+//   }
+// }
 // console.log(fetchData1(sheetData[0], 'point1'));
 // console.log(fetchData2(sheetData[0], 'point1'));
 // console.log(fetchData3(sheetData[0], 'point1'));
 
-// スプシで取得した0か1の値に対して、1であれば指定した画像を表示、0であれば表示しない　という関数
-function updateImageDisplay(range, elementId) {
-  fetchData3(range, elementId).then((value) => {
-    const imageElement = document.getElementById(elementId);
-    // セルの値が "1" であれば画像を表示
-    if (value === "1") {
-      imageElement.style.display = " inline-block";
-    } else {
-      imageElement.style.display = "none";
-    }
-  });
+function updateScore(index, elementId) {
+  const value = localStorage.getItem(`${index}`);
+  const scoreElement = document.getElementById(elementId);
+  scoreElement.innerText = value;
 }
+// スプシで取得した0か1の値に対して、1であれば指定した画像を表示、0であれば表示しない　という関数
+function updateImageDisplay(index, elementId) {
+  const value = localStorage.getItem(`${index}`);
+  const imageElement = document.getElementById(elementId);
+  // セルの値が "1" であれば画像を表示
+  if (value === "1") {
+    imageElement.style.display = " inline-block";
+  } else {
+    imageElement.style.display = "none";
+  }
+}
+
 // 大学の名前を表示する関数
-function displayUniversity(range, elementId) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[3]}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      const nameOfUniversity = data.values[0][0];
-      localStorage.setItem(elementId, nameOfUniversity);
-      document.getElementById(elementId).innerText = nameOfUniversity;
-      return nameOfUniversity;
-    })
-    .catch((error) => {
-      // console.error('Error fetching data:', error);
-      document.getElementById(elementId).innerText = "now_loading...";
-      return "now_loading...";
-    });
+function displayUniversity(index, elementId) {
+  const nameOfUniversity = localStorage.getItem(`${index}`);
+  document.getElementById(elementId).innerText = nameOfUniversity;
+  return nameOfUniversity;
 }
 
 // いろいろ取得する
-async function updateObjects() {
-  try {
-    // fetchData を待ち、その結果を整数に変換
-    const dataPineLeft = await fetchData1(sheetData[6], "pineNumberCellLeft");
-    const dataPineRight = await fetchData2(sheetData[7], "pineNumberCellRight");
-    pineValueLeft = parseInt(dataPineLeft, 10);
-    console.log(pineValueLeft);
-    pineValueRight = parseInt(dataPineRight, 10);
-    console.log(pineValueRight);
+function updateObjects() {
+  // fetchData を待ち、その結果を整数に変換
+  const dataPineLeft = localStorage.getItem("6");
+  const dataPineRight = localStorage.getItem("7");
+  pineValueLeft = parseInt(dataPineLeft, 10);
+  pineValueRight = parseInt(dataPineRight, 10);
 
-    const dataChocoLeft = await fetchData1(sheetData[8], "chocoNumberCellLeft");
-    const dataChocoRight = await fetchData2(
-      sheetData[9],
-      "chocoNumberCellRight"
-    );
-    chocoValueLeft = parseInt(dataChocoLeft, 10);
-    console.log(chocoValueLeft);
-    chocoValueRight = parseInt(dataChocoRight, 10);
-    console.log(chocoValueRight);
+  const dataChocoLeft = localStorage.getItem("8");
+  const dataChocoRight = localStorage.getItem("9");
+  chocoValueLeft = parseInt(dataChocoLeft, 10);
+  chocoValueRight = parseInt(dataChocoRight, 10);
 
-    const dataBreadLeft = await fetchData1(
-      sheetData[10],
-      "breadNumberCellLeft"
-    );
-    const dataBreadRight = await fetchData2(
-      sheetData[11],
-      "breadNumberCellRight"
-    );
-    breadValueLeft = parseInt(dataBreadLeft, 10);
-    console.log(breadValueLeft);
-    breadValueRight = parseInt(dataBreadRight, 10);
-    console.log(breadValueRight);
-  } catch (error) {
-    console.error("Error:", error);
-  }
+  const dataBreadLeft = localStorage.getItem("10");
+  const dataBreadRight = localStorage.getItem("11");
+  breadValueLeft = parseInt(dataBreadLeft, 10);
+  breadValueRight = parseInt(dataBreadRight, 10);
 
   pine1.style.display = " inline-block";
   pine2.style.display = " inline-block";
@@ -401,45 +370,42 @@ async function updateObjects() {
 }
 
 // ここで本体表示
-fetchData1(sheetData[0], "point1");
-fetchData2(sheetData[1], "point2");
-updateImageDisplay(sheetData[4], "bon1");
-updateImageDisplay(sheetData[5], "bon2");
-updateImageDisplay(sheetData[2], "check1");
-updateImageDisplay(sheetData[3], "check2");
-displayUniversity(sheetData[12], "leftUniversity");
-displayUniversity(sheetData[13], "rightUniversity");
+updateScore(0, "point1");
+updateScore(1, "point2");
+updateImageDisplay(4, "bon1");
+updateImageDisplay(5, "bon2");
+// updateImageDisplay(2, "check1");
+// updateImageDisplay(3, "check2");
+displayUniversity(12, "leftUniversity");
+displayUniversity(13, "rightUniversity");
 updateObjects();
 
-setInterval(async () => {
-  console.log("Interval triggered"); // インターバルが発火したことをログで確認
-  try {
-    await fetchData1(sheetData[0], "point1");
-    await fetchData2(sheetData[1], "point2");
-    updateImageDisplay(sheetData[4], "bon1");
-    updateImageDisplay(sheetData[5], "bon2");
-    updateImageDisplay(sheetData[2], "check1");
-    updateImageDisplay(sheetData[3], "check2");
-    await updateObjects(); // 正しく await されていることを確認
-  } catch (error) {
-    console.error("Interval error:", error);
-  }
-  document.getElementById("chocoNumberCellLeft").innerText = "";
-  document.getElementById("chocoNumberCellRight").innerText = "";
-  document.getElementById("pineNumberCellLeft").innerText = "";
-  document.getElementById("pineNumberCellRight").innerText = "";
-  document.getElementById("breadNumberCellLeft").innerText = "";
-  document.getElementById("breadNumberCellRight").innerText = "";
-}, 5000);
+setInterval(() => {
+  updateScore(0, "point1");
+  updateScore(1, "point2");
+  updateImageDisplay(4, "bon1");
+  updateImageDisplay(5, "bon2");
+  // updateImageDisplay(2, "check1");
+  // updateImageDisplay(3, "check2");
+  displayUniversity(12, "leftUniversity");
+  displayUniversity(13, "rightUniversity");
+  updateObjects();
+  //   document.getElementById("chocoNumberCellLeft").innerText = "";
+  //   document.getElementById("chocoNumberCellRight").innerText = "";
+  //   document.getElementById("pineNumberCellLeft").innerText = "";
+  //   document.getElementById("pineNumberCellRight").innerText = "";
+  //   document.getElementById("breadNumberCellLeft").innerText = "";
+  //   document.getElementById("breadNumberCellRight").innerText = "";
+}, 100);
 
 // スプレッドシートから値を取得する関数
-async function fetchSpreadsheetValue(range) {
-  const response = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[4]}`
-  );
-  const data = await response.json();
-  return data.values[0][0]; // 取得した値を返す（例：1か0）
-}
+// async function fetchSpreadsheetValue(range) {
+//   const response = await fetch(
+//     `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKeys[4]}`
+//   );
+//   const data = await response.json();
+//   return data.values[0][0]; // 取得した値を返す（例：1か0）
+// }
 
 function playAudio() {
   var audio = document.getElementById("music");
@@ -448,86 +414,86 @@ function playAudio() {
   });
 }
 
-async function startTimer() {
-  let nokori = 183; // 180秒（3分）
-  let settingNokori = 61;
-  let countdown = 3;
-  let setting_flag = false;
-  let regulation_flag = false;
-  setInterval(async () => {
-    const value = await fetchSpreadsheetValue(sheetData[14]);
-    console.log(value);
-    if (value === "1") {
-      document.getElementById("timer").innerText = "set";
-    } else if (value === "2") {
-      if (!setting_flag) {
-        settingNokori = 61;
-        setting_flag = true;
-      }
-      settingNokori -= 1;
-      const minutes = Math.floor(settingNokori / 60);
-      const seconds = settingNokori % 60;
+// async function startTimer() {
+//   let nokori = 183; // 180秒（3分）
+//   let settingNokori = 61;
+//   let countdown = 3;
+//   let setting_flag = false;
+//   let regulation_flag = false;
+//   setInterval(async () => {
+//     const value = await fetchSpreadsheetValue(sheetData[14]);
+//     console.log(value);
+//     if (value === "1") {
+//       document.getElementById("timer").innerText = "set";
+//     } else if (value === "2") {
+//       if (!setting_flag) {
+//         settingNokori = 61;
+//         setting_flag = true;
+//       }
+//       settingNokori -= 1;
+//       const minutes = Math.floor(settingNokori / 60);
+//       const seconds = settingNokori % 60;
 
-      const timeString = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-      console.log(timeString);
+//       const timeString = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+//       console.log(timeString);
 
-      if (settingNokori > 0) {
-        document.getElementById("timer").innerText = timeString;
-      } else {
-        document.getElementById("timer").innerText = "0:00";
-      }
-    } else if (value === "3") {
-      document.getElementById("timer").innerText = "stop";
-    } else if (value === "4") {
-      document.getElementById("timer").innerText = "ready";
-    } else if (value === "5") {
-      if (!regulation_flag) {
-        nokori = 183;
-        countdown = 3;
-        regulation_flag = true;
-      }
-      countdown -= 1;
-      nokori -= 1;
+//       if (settingNokori > 0) {
+//         document.getElementById("timer").innerText = timeString;
+//       } else {
+//         document.getElementById("timer").innerText = "0:00";
+//       }
+//     } else if (value === "3") {
+//       document.getElementById("timer").innerText = "stop";
+//     } else if (value === "4") {
+//       document.getElementById("timer").innerText = "ready";
+//     } else if (value === "5") {
+//       if (!regulation_flag) {
+//         nokori = 183;
+//         countdown = 3;
+//         regulation_flag = true;
+//       }
+//       countdown -= 1;
+//       nokori -= 1;
 
-      console.log(countdown);
-      console.log(nokori);
+//       console.log(countdown);
+//       console.log(nokori);
 
-      const minutes = Math.floor(nokori / 60);
-      const seconds = nokori % 60;
-      const timeString = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-      console.log(timeString);
+//       const minutes = Math.floor(nokori / 60);
+//       const seconds = nokori % 60;
+//       const timeString = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+//       console.log(timeString);
 
-      if (countdown < 4 && countdown > 0) {
-        if (countdown === 3) {
-          document.getElementById("timer").innerText = countdown;
-          playAudio();
-          console.log("ここでなるはず");
-        }
-        document.getElementById("timer").innerText = countdown;
-      } else if (countdown < 1 && nokori > 177) {
-        document.getElementById("timer").innerText = "GO!";
-      } else if (nokori > 0 && nokori < 178) {
-        if (nokori === 3) {
-          document.getElementById("timer").innerText = timeString;
-          playAudio();
-          console.log("ここでなるはず");
-        } else {
-          document.getElementById("timer").innerText = timeString;
-        }
-      } else if (nokori < 1) {
-        document.getElementById("timer").innerText = "FINISH!";
-      }
-    } else {
-      console.log("タイマーは進行しません");
-    }
+//       if (countdown < 4 && countdown > 0) {
+//         if (countdown === 3) {
+//           document.getElementById("timer").innerText = countdown;
+//           playAudio();
+//           console.log("ここでなるはず");
+//         }
+//         document.getElementById("timer").innerText = countdown;
+//       } else if (countdown < 1 && nokori > 177) {
+//         document.getElementById("timer").innerText = "GO!";
+//       } else if (nokori > 0 && nokori < 178) {
+//         if (nokori === 3) {
+//           document.getElementById("timer").innerText = timeString;
+//           playAudio();
+//           console.log("ここでなるはず");
+//         } else {
+//           document.getElementById("timer").innerText = timeString;
+//         }
+//       } else if (nokori < 1) {
+//         document.getElementById("timer").innerText = "FINISH!";
+//       }
+//     } else {
+//       console.log("タイマーは進行しません");
+//     }
 
-    // タイマー停止時のリセット
-    if (setting_flag && value != "2") {
-      setting_flag = false;
-    } else if (regulation_flag && value != "5") {
-      regulation_flag = false;
-    }
-  }, 1000);
-}
+//     // タイマー停止時のリセット
+//     if (setting_flag && value != "2") {
+//       setting_flag = false;
+//     } else if (regulation_flag && value != "5") {
+//       regulation_flag = false;
+//     }
+//   }, 1000);
+// }
 
-startTimer();
+// startTimer();
