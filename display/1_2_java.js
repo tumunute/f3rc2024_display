@@ -724,8 +724,8 @@ function startSetting() {
 }
 
 function startGame() {
-    let nokori = 185; // 180秒（3分）
-    let countdown = 5;
+    let nokori = 186; // 180秒（3分）
+    let countdown = 6;
     let setting_flag = false;
     let regulation_flag = false;
 
@@ -746,10 +746,12 @@ function startGame() {
         const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         console.log(timeString);
 
-        if (countdown < 6 && countdown > 0) {
+        if (countdown < 7 && countdown > 0) {
+            document.getElementById("timer").innerText = countdown;
+            document.getElementById("timer-ready").innerText = " ";
             if (countdown === 3) {
-                document.getElementById("timer").innerText = countdown;
                 document.getElementById("timer-ready").innerText = " ";
+                document.getElementById("timer").innerText = countdown;
                 document.getElementById("timer-finish").innerText = " ";
                 playAudio();
                 console.log("ここでなるはず");
@@ -774,9 +776,9 @@ function startGame() {
                 console.log("ここで呼び出されてたらセーフスタート");
             }
         } else if (nokori < 1) {
-            document.getElementById("timer").innerText = "FINISH!";
+            document.getElementById("timer").innerText = "";
             document.getElementById("timer-ready").innerText = " ";
-            document.getElementById("timer-finish").innerText = " ";
+            document.getElementById("timer-finish").innerText = "FINISH!";
         } else {
             console.log("タイマーは進行しません");
         }
