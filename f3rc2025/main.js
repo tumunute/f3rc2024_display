@@ -1,5 +1,8 @@
 // 音を鳴らすためのもの
-alert("ようこそ(音を鳴らすためにこれが必要らしい)");
+$cover = document.getElementById("cover");
+$cover.onclick = () => {
+    $cover.style.display = "none";
+}
 
 //
 // 基本パラメーター
@@ -15,8 +18,10 @@ const sheet_url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/valu
 // 変数
 //
 var fetched_data;
-var prev_during_match = false;
-var during_match = false;
+var prev_timer_dict = {};
+var setting_start_time = 0;
+var match_start_time = 0;
+var power_on_time = [0, 0];
 
 //
 // DOM要素の取得
@@ -103,11 +108,21 @@ function dataToDataDict(data) {
 
 // タイマーを更新する(タイマー専門)
 function renew_timer(timer_dict) {
+    // タイムスタンプの取得
+    if(!prev_timer_dict.setting_timer_started && timer_dict.setting_timer_started) {
+        setting_start_time = new Date().getTime() / 1000;
+    }
+    if(!prev_timer_dict.match_timer_started && timer_dict.match_timer_started) {
+        match_start_time = new Date().getTime() / 1000 + 5;
+    }
+    
+
+    // 表示への反映
     var time = new Date().getTime() / 1000;
     prev_during_match = during_match;
     during_match = false;
     if (timer_dict.match_timer_started) {
-        let remained_time = Math.ceil(timer_dict.match_start_time + 180 - time);
+        let remained_time = Math.ceil(match_start_time + 180 - time);
         if (remained_time >= 185) {
             $timer.innerText = "5";
         } else if (remained_time > 180) {
@@ -121,11 +136,13 @@ function renew_timer(timer_dict) {
     } else if (timer_dict.before_match) {
         $timer.innerText = "READY"
     } else if (timer_dict.setting_timer_started) {
-        let remained_time = Math.ceil(timer_dict.setting_start_time + 60 - time);
+        let remained_time = Math.ceil(setting_start_time + 60 - time);
         if (remained_time >= 60) {
             $timer.innerText = "1:00";
-        } else {
+        } else if (remained_time > 0) {
             $timer.innerText = `0:${("00" + remained_time % 60).slice(-2)}`;
+        } else {
+            $timer.innerText = "0:00";
         }
     } else if (timer_dict.setting_timer_displayed) {
         $timer.innerText = "1:00";
@@ -136,6 +153,8 @@ function renew_timer(timer_dict) {
     if ($timer.innerText.length > 4) {
         $timer.style.fontSize = "100px";
     }
+
+    prev_timer_dict = timer_dict;
 }
 
 // チーム別の表示を更新する
