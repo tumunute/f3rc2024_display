@@ -1,3 +1,4 @@
+# 自分用
 * f3rc2025向けにコードを作る
 * コードの構造が冗長だったので、単純化を目指す
 
@@ -9,3 +10,6 @@
 * API KeyとかSheet IDとか取得しなおす
 
 * classつけてCSSをきれいにしたい
+
+# 後世の皆さんへ
+* スプシはここ: https://docs.google.com/spreadsheets/d/1QzzrpKhsqCrdO96jF8X1TP47icwknGuqvcYKWPlC3y4/edit?usp=sharing

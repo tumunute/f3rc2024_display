@@ -160,13 +160,32 @@ function renew_timer(timer_dict) {
 }
 
 function renew_points(data_dict) {
-    // for (let i = 0; i < 2; i++) {
-    //     let point = 0;
-    //     if(data_dict.team_data[i].coal_touched)
-    // }
+    for (let i = 0; i < 2; i++) {
+        let point = 0;
+        if (data_dict.team_data[i].fuel_touched) {
+            point += 2;
+        }
+        if (data_dict.team_data[i].cable_touched) {
+            point += 2;
+        }
+        if (data_dict.team_data[i].fuel_touched && data_dict.team_data[i].cable_touched) {
+            point += 1;
+        }
+        let fuel_num = data_dict.team_data[i].coal_num + data_dict.team_data[i].oil_num;
+        point += fuel_num * 10;
+        let cable_num = data_dict.team_data[i].cable_num;
+        point += cable_num * 30;
+        if (fuel_num == 6) {
+            point += 85;
+        }
+        if (cable_num == 3) {
+            point += 60;
+        }
+        $team_dom[i].point.innerText = String(point);
+    }
 }
 
-// チーム別の表示を更新する
+// チーム別の表示(点数以外)を更新する
 function renew_team_display(data_dict) {
     for (let i = 0; i < 2; i++) {
         // 送電線
@@ -220,6 +239,7 @@ function renew_team_display(data_dict) {
 // 表示全てを更新する
 function renew_display(data_dict) {
     renew_timer(data_dict.timer);
+    renew_points(data_dict);
     renew_team_display(data_dict);
 }
 
