@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Google Sheetsからデータを取得</title>
+  </head>
+
+  <body id="display">
+    <!-- 送電線左 -->
+    <div id="cableContainerLeft">
+      <img src="img/cable.png" alt="送電線画像1" id="cable1" />
+      <img src="img/cable.png" alt="送電線画像2" id="cable2" />
+      <img src="img/cable.png" alt="送電線画像3" id="cable3" />
+    </div>
+    <!-- 石炭左 -->
+    <div id="coalContainerLeft">
+      <img src="img/coal.png" alt="石炭画像1" id="coal1" />
+      <img src="img/coal.png" alt="石炭画像2" id="coal2" />
+      <img src="img/coal.png" alt="石炭画像3" id="coal3" />
+    </div>
+    <div id="coalHandContainerLeft">
+      <img src="img/hand.png" alt="手画像1" id="coalHand1" />
+    </div>
+    <!-- 石油左 -->
+    <div id="oilContainerLeft">
+      <img src="img/oil.png" alt="石油画像1" id="oil1" />
+      <img src="img/oil.png" alt="石油画像2" id="oil2" />
+      <img src="img/oil.png" alt="石油画像3" id="oil3" />
+    </div>
+    <div id="oilHandContainerLeft">
+      <img src="img/hand.png" alt="手画像2" id="oilHand1" />
+    </div>
+
+    <div id="cableContainerRight" class="cable">
+      <img src="img/cable.png" alt="送電線画像4" id="cable4" />
+      <img src="img/cable.png" alt="送電線画像5" id="cable5" />
+      <img src="img/cable.png" alt="送電線画像6" id="cable6" />
+    </div>
+    <div id="coalContainerRight">
+      <img src="img/coal.png" alt="石炭画像4" id="coal6" />
+      <img src="img/coal.png" alt="石炭画像5" id="coal7" />
+      <img src="img/coal.png" alt="石炭画像6" id="coal8" />
+    </div>
+    <div id="coalHandContainerRight">
+      <img src="img/hand.png" alt="手画像1" id="coalHand2" />
+    </div>
+    <div id="oilContainerRight">
+      <img src="img/oil.png" alt="石油画像4" id="oil6" />
+      <img src="img/oil.png" alt="石油画像5" id="oil7" />
+      <img src="img/oil.png" alt="石油画像6" id="oil8" />
+    </div>
+    <div id="oilHandContainerRight">
+      <img src="img/hand.png" alt="手画像2" id="oilHand2" />
+    </div>
+    <!-- </div> -->
+    <!-- ポイント1 -->
+    <div id="point1">000</div>
+
+    <!-- ポイント2 -->
+    <div id="point2">000</div>
+
+    <!-- タイマー -->
+    <div id="timer">3:00</div>
+
+    <!-- 左側の大学 -->
+    <div>
+      <div id="leftUniversity">えふきゅーぶ大学</div>
+    </div>
+
+    <!-- 右側の大学 -->
+    <div>
+      <div id="rightUniversity">えふきゅーぶ大学</div>
+    </div>
+
+    <!-- power on1 -->
+    <div>
+      <img src="img/power_on.png" id="po1" alt="po1" />
+    </div>
+
+    <!-- power on2 -->
+    <div>
+      <!--<img src="img/power_on.png" id="po2" alt="po2" />-->
+    </div>
+    <div id="coalNumberCellLeft"></div>
+    <div id="oilNumberCellLeft"></div>
+    <div id="cableNumberCellLeft"></div>
+    <div id="coalNumberCellRight"></div>
+    <div id="oilNumberCellRight"></div>
+    <div id="cableNumberCellRight"></div>
+    <div id="start"></div>
+    <audio src="./1.mp3" id="music"></audio>
+    <pre id="output"></pre>
+    <!-- <script src="1_java.js"></script> -->
+    <script src="api_java1.js?t=<?php echo time(); ?>"></script>
+    <script src="1_2_java.js?t=<?php echo time(); ?>"></script>
+  </body>
+</html>
