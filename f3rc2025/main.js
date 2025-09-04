@@ -43,12 +43,12 @@ for (let i = 0; i < 2; i++) {
     for (let j = 0; j < 3; j++) {
         $team_dom[i].coal.push(document.getElementById(`coal_${lr[i]}${j}`));
     }
-    $team_dom[i].coal_hand = document.getElementById(`coal_hand_${lr[i]}`);
+    $team_dom[i].cable_hand = document.getElementById(`cable_hand_${lr[i]}`);
     $team_dom[i].oil = [];
     for (let j = 0; j < 3; j++) {
         $team_dom[i].oil.push(document.getElementById(`oil_${lr[i]}${j}`));
     }
-    $team_dom[i].oil_hand = document.getElementById(`oil_hand_${lr[i]}`);
+    $team_dom[i].fuel_hand = document.getElementById(`fuel_hand_${lr[i]}`);
     $team_dom[i].power_on = document.getElementById(`power_on_${lr[i]}`);
 
 }
@@ -88,9 +88,9 @@ function dataToDataDict(data) {
         data_dict.team_data[i] = {
             cable_num: +data.values[0][i],
             coal_num: +data.values[1][i],
-            coal_touched: +data.values[2][i] == 1,
+            cable_touched: +data.values[2][i] == 1,
             oil_num: +data.values[3][i],
-            oil_touched: +data.values[4][i] == 1,
+            fuel_touched: +data.values[4][i] == 1,
             power_on: +data.values[5][i] == 1,
             name: data.values[6][i]
         }
@@ -159,6 +159,13 @@ function renew_timer(timer_dict) {
     prev_timer_dict = timer_dict;
 }
 
+function renew_points(data_dict) {
+    // for (let i = 0; i < 2; i++) {
+    //     let point = 0;
+    //     if(data_dict.team_data[i].coal_touched)
+    // }
+}
+
 // チーム別の表示を更新する
 function renew_team_display(data_dict) {
     for (let i = 0; i < 2; i++) {
@@ -167,7 +174,7 @@ function renew_team_display(data_dict) {
             if (j < data_dict.team_data[i].cable_num) {
                 $team_dom[i].cable[j].style.opacity = "1.0";
             } else {
-                $team_dom[i].cable[j].style.opacity = "0.0";
+                $team_dom[i].cable[j].style.opacity = "0.2";
             }
         }
         // 石炭
@@ -175,28 +182,28 @@ function renew_team_display(data_dict) {
             if (j < data_dict.team_data[i].coal_num) {
                 $team_dom[i].coal[j].style.opacity = "1.0";
             } else {
-                $team_dom[i].coal[j].style.opacity = "0.0";
+                $team_dom[i].coal[j].style.opacity = "0.2";
             }
         }
-        // 石炭触れた
-        if (data_dict.team_data[i].coal_touched) {
-            $team_dom[i].coal_hand.style.opacity = "1.0";
+        // 送電線触れた
+        if (data_dict.team_data[i].cable_touched) {
+            $team_dom[i].cable_hand.style.opacity = "1.0";
         } else {
-            $team_dom[i].coal_hand.style.opacity = "0.0";
+            $team_dom[i].cable_hand.style.opacity = "0.2";
         }
         // 石油
         for (let j = 0; j < 3; j++) {
             if (j < data_dict.team_data[i].oil_num) {
                 $team_dom[i].oil[j].style.opacity = "1.0";
             } else {
-                $team_dom[i].oil[j].style.opacity = "0.0";
+                $team_dom[i].oil[j].style.opacity = "0.2";
             }
         }
-        // 石油触れた
-        if (data_dict.team_data[i].oil_touched) {
-            $team_dom[i].oil_hand.style.opacity = "1.0";
+        // 燃料触れた
+        if (data_dict.team_data[i].fuel_touched) {
+            $team_dom[i].fuel_hand.style.opacity = "1.0";
         } else {
-            $team_dom[i].oil_hand.style.opacity = "0.0";
+            $team_dom[i].fuel_hand.style.opacity = "0.2";
         }
         // Power On
         if (data_dict.team_data[i].power_on) {
