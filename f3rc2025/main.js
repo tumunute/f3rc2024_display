@@ -22,6 +22,9 @@ var prev_timer_dict = {};
 var setting_start_time = 0;
 var match_start_time = 0;
 var power_on_time = [0, 0];
+var prev_remained_time = 0;
+var current_remained_time = 0;
+var update_count = 0;
 
 //
 // DOM要素の取得
@@ -59,6 +62,7 @@ var $timer = document.getElementById(`timer`);
 async function fetchData() {
     try {
         const response = await fetch(sheet_url);
+        console.log("fetch");
         if (!response.ok) {
             throw new Error(`サーバーからの応答が異常です: ${response.status}`);
         }
@@ -88,8 +92,7 @@ function dataToDataDict(data) {
             oil_num: +data.values[3][i],
             oil_touched: +data.values[4][i] == 1,
             power_on: +data.values[5][i] == 1,
-            name: data.values[6][i],
-            power_on_time: +data.values[7][i]
+            name: data.values[6][i]
         }
     }
 
@@ -98,9 +101,7 @@ function dataToDataDict(data) {
         setting_timer_displayed: +data.values[1][2] == 1,
         setting_timer_started: +data.values[2][2] == 1,
         before_match: +data.values[3][2] == 1,
-        match_timer_started: +data.values[4][2] == 1,
-        setting_start_time: +data.values[5][2],
-        match_start_time: +data.values[6][2]
+        match_timer_started: +data.values[4][2] == 1
     };
 
     return data_dict;
@@ -109,27 +110,25 @@ function dataToDataDict(data) {
 // タイマーを更新する(タイマー専門)
 function renew_timer(timer_dict) {
     // タイムスタンプの取得
-    if(!prev_timer_dict.setting_timer_started && timer_dict.setting_timer_started) {
+    if (!prev_timer_dict.setting_timer_started && timer_dict.setting_timer_started) {
         setting_start_time = new Date().getTime() / 1000;
     }
-    if(!prev_timer_dict.match_timer_started && timer_dict.match_timer_started) {
+    if (!prev_timer_dict.match_timer_started && timer_dict.match_timer_started) {
         match_start_time = new Date().getTime() / 1000 + 5;
     }
-    
+
 
     // 表示への反映
     var time = new Date().getTime() / 1000;
-    prev_during_match = during_match;
-    during_match = false;
     if (timer_dict.match_timer_started) {
         let remained_time = Math.ceil(match_start_time + 180 - time);
+        current_remained_time = remained_time;
         if (remained_time >= 185) {
             $timer.innerText = "5";
         } else if (remained_time > 180) {
             $timer.innerText = String(remained_time - 180);
         } else if (remained_time > 0) {
             $timer.innerText = `${Math.floor(remained_time / 60)}:${("00" + (remained_time % 60)).slice(-2)}`;
-            during_match = true;
         } else {
             $timer.innerText = "0:00";
         }
@@ -137,6 +136,7 @@ function renew_timer(timer_dict) {
         $timer.innerText = "READY"
     } else if (timer_dict.setting_timer_started) {
         let remained_time = Math.ceil(setting_start_time + 60 - time);
+        current_remained_time = remained_time;
         if (remained_time >= 60) {
             $timer.innerText = "1:00";
         } else if (remained_time > 0) {
@@ -152,6 +152,8 @@ function renew_timer(timer_dict) {
 
     if ($timer.innerText.length > 4) {
         $timer.style.fontSize = "100px";
+    } else {
+        $timer.style.fontSize = "200px";
     }
 
     prev_timer_dict = timer_dict;
@@ -225,17 +227,30 @@ function playAudio() {
 //
 // 全体の更新
 //
-function update() {
-    fetchData().then(() => {
-        var data_dict = dataToDataDict(fetched_data);
-        renew_display(data_dict);
-        if (!prev_during_match && during_match) {
+function updateImpl() {
+    var data_dict = dataToDataDict(fetched_data);
+    renew_display(data_dict);
+
+    if (data_dict.timer.match_timer_started) {
+        if (prev_remained_time > 183 && current_remained_time <= 183 || prev_remained_time > 3 && current_remained_time <= 3) {
             playAudio();
         }
-    });
+    }
+    prev_remained_time = current_remained_time;
+}
+
+function update() {
+    if (update_count % 15 == 0) {
+        // API呼び出し上限が1分60回のため、呼び出し回数を削減
+        fetchData().then(updateImpl);
+    } else {
+        // タイマーの表示を自然にするためにupdateは高頻度で
+        updateImpl();
+    }
+    update_count++;
 }
 
 //
 // 本流
 //
-setInterval(update, 1000);
+setInterval(update, 100);
