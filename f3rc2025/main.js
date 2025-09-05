@@ -155,8 +155,6 @@ function renew_timer(timer_dict) {
     } else {
         $timer.style.fontSize = "200px";
     }
-
-    prev_timer_dict = timer_dict;
 }
 
 function renew_points(data_dict) {
@@ -244,8 +242,15 @@ function renew_display(data_dict) {
 }
 
 // 音声を再生する
-function playAudio() {
-    var audio = document.getElementById("music");
+function playCountDownAudio() {
+    var audio = document.getElementById("music_count_down");
+    audio.play().catch((error) => {
+        console.error("再生中にエラーが発生しました:", error);
+    });
+}
+
+function playSettingAudio() {
+    var audio = document.getElementById("music_setting");
     audio.play().catch((error) => {
         console.error("再生中にエラーが発生しました:", error);
     });
@@ -260,10 +265,17 @@ function updateImpl() {
 
     if (data_dict.timer.match_timer_started) {
         if (prev_remained_time > 183 && current_remained_time <= 183 || prev_remained_time > 3 && current_remained_time <= 3) {
-            playAudio();
+            playCountDownAudio();
+        }
+    } else if (!data_dict.timer.before_match && data_dict.timer.setting_timer_started) {
+        if (!prev_timer_dict.setting_timer_started) {
+            playSettingAudio();
+        } else if (prev_remained_time > 0 && current_remained_time <= 0) {
+            playSettingAudio();
         }
     }
     prev_remained_time = current_remained_time;
+    prev_timer_dict = data_dict.timer;
 }
 
 function update() {
