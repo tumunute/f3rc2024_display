@@ -27,6 +27,14 @@ var current_remained_time = 0;
 var prev_update_time = 0;
 const fetch_interval = 1.5;
 
+// オーディオ再生用
+// 参考: https://webfrontend.ninja/js-audio-autoplay-policy-and-delay/
+const audio_ctx = new AudioContext();
+let count_down_audio_buffer = null;
+let count_down_audio_buffer_node = null;
+let setting_audio_buffer = null;
+let setting_audio_buffer_node = null;
+
 //
 // DOM要素の取得
 //
@@ -242,19 +250,29 @@ function renew_display(data_dict) {
     renew_team_display(data_dict);
 }
 
+// 音源再生のために準備を行う
+function prepareCountDownAudioBufferNode() {
+  count_down_audio_buffer_node = audio_ctx.createBufferSource();
+  count_down_audio_buffer_node.buffer = count_down_audio_buffer;
+  count_down_audio_buffer_node.connect(audio_ctx.destination);
+}
+
+function prepareSettingAudioBufferNode() {
+  setting_audio_buffer_node = audio_ctx.createBufferSource();
+  setting_audio_buffer_node.buffer = setting_audio_buffer;
+  setting_audio_buffer_node.connect(audio_ctx.destination);
+}
+
+
 // 音声を再生する
 function playCountDownAudio() {
-    var audio = document.getElementById("music_count_down");
-    audio.play().catch((error) => {
-        console.error("再生中にエラーが発生しました:", error);
-    });
+    count_down_audio_buffer_node.start(0);
+    prepareCountDownAudioBufferNode();
 }
 
 function playSettingAudio() {
-    var audio = document.getElementById("music_setting");
-    audio.play().catch((error) => {
-        console.error("再生中にエラーが発生しました:", error);
-    });
+    setting_audio_buffer_node.start(0);
+    prepareSettingAudioBufferNode();
 }
 
 //
@@ -266,7 +284,7 @@ function updateImpl() {
 
     if (data_dict.timer.match_timer_started) {
         // console.log(current_remained_time);
-        if (prev_remained_time > 183.5 && current_remained_time <= 183.5 || prev_remained_time > 3.5 && current_remained_time <= 3.5) {
+        if (prev_remained_time > 183 && current_remained_time <= 183 || prev_remained_time > 3 && current_remained_time <= 3) {
             playCountDownAudio();
         }
     } else if (!data_dict.timer.before_match && data_dict.timer.setting_timer_started) {
@@ -293,6 +311,21 @@ function update() {
         updateImpl();
     }
 }
+
+//
+// audio周りの準備
+//
+(async () => {
+  const count_down_response = await fetch('https://dl.dropboxusercontent.com/scl/fi/kvxlymly2obdztlu0igcu/count_down.mp3?rlkey=hy9lyafjeohcxn0d4sxatvo39&st=x56qli1x&dl=0')
+  const count_down_response_buffer = await count_down_response.arrayBuffer();
+  count_down_audio_buffer = await audio_ctx.decodeAudioData(count_down_response_buffer);
+  prepareCountDownAudioBufferNode();
+  
+  const setting_response = await fetch('https://dl.dropboxusercontent.com/scl/fi/cd9b52sj7hokbexop9q04/setting.mp3?rlkey=586wmll0x1sz1ra4xtvzjx8k2&st=tk6esk0u&dl=0')
+  const setting_response_buffer = await setting_response.arrayBuffer();
+  setting_audio_buffer = await audio_ctx.decodeAudioData(setting_response_buffer);
+  prepareSettingAudioBufferNode();
+})();
 
 //
 // 本流
