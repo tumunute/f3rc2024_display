@@ -11,7 +11,7 @@ $cover.onclick = () => {
 // スプシのデータを取るための情報
 const sheetId = "1QzzrpKhsqCrdO96jF8X1TP47icwknGuqvcYKWPlC3y4";
 const range = "display!G21:I28";
-const api_key = "AIzaSyBUBFMVirf2m6HxxEbE6Pjt2zS5S_r2214";
+const api_key = "AIzaSyDgvcVnc7jG1ZSkSK4BMGAfj585fkgCXKg";
 const sheet_url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${api_key}`;
 
 //
