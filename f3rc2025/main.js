@@ -24,7 +24,8 @@ var match_start_time = 0;
 var power_on_time = [0, 0];
 var prev_remained_time = 0;
 var current_remained_time = 0;
-var update_count = 0;
+var prev_update_time = 0;
+const fetch_interval = 1.5;
 
 //
 // DOM要素の取得
@@ -264,10 +265,9 @@ function updateImpl() {
     renew_display(data_dict);
 
     if (data_dict.timer.match_timer_started) {
-        console.log(current_remained_time);
+        // console.log(current_remained_time);
         if (prev_remained_time > 183.5 && current_remained_time <= 183.5 || prev_remained_time > 3.5 && current_remained_time <= 3.5) {
             playCountDownAudio();
-            console.log("aaaaaaaa");
         }
     } else if (!data_dict.timer.before_match && data_dict.timer.setting_timer_started) {
         if (!prev_timer_dict.setting_timer_started) {
@@ -281,14 +281,17 @@ function updateImpl() {
 }
 
 function update() {
-    if (update_count % 15 == 0) {
+    var update_time = new Date().getTime() / 1000;
+    var fetch_flag = (prev_update_time % fetch_interval > update_time % fetch_interval);
+    prev_update_time = update_time;
+
+    if (fetch_flag) {
         // API呼び出し上限が1分60回のため、呼び出し回数を削減
         fetchData().then(updateImpl);
     } else {
         // タイマーの表示を自然にするためにupdateは高頻度で
         updateImpl();
     }
-    update_count++;
 }
 
 //
