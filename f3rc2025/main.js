@@ -11,7 +11,7 @@ $cover.onclick = () => {
 // スプシのデータを取るための情報
 const sheetId = "1QzzrpKhsqCrdO96jF8X1TP47icwknGuqvcYKWPlC3y4";
 const range = "display!G21:I28";
-const api_key = "AIzaSyDgvcVnc7jG1ZSkSK4BMGAfj585fkgCXKg";
+const api_key = "AIzaSyBUBFMVirf2m6HxxEbE6Pjt2zS5S_r2214";
 const sheet_url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${api_key}`;
 
 //
@@ -121,8 +121,8 @@ function renew_timer(timer_dict) {
     // 表示への反映
     var time = new Date().getTime() / 1000;
     if (timer_dict.match_timer_started) {
-        let remained_time = Math.ceil(match_start_time + 180 - time);
-        current_remained_time = remained_time;
+        current_remained_time = match_start_time + 180 - time;
+        let remained_time = Math.ceil(current_remained_time);
         if (remained_time >= 185) {
             $timer.innerText = "5";
         } else if (remained_time > 180) {
@@ -135,8 +135,8 @@ function renew_timer(timer_dict) {
     } else if (timer_dict.before_match) {
         $timer.innerText = "READY"
     } else if (timer_dict.setting_timer_started) {
-        let remained_time = Math.ceil(setting_start_time + 60 - time);
-        current_remained_time = remained_time;
+        current_remained_time = setting_start_time + 60 - time;
+        let remained_time = Math.ceil(current_remained_time);
         if (remained_time >= 60) {
             $timer.innerText = "1:00";
         } else if (remained_time > 0) {
@@ -264,8 +264,10 @@ function updateImpl() {
     renew_display(data_dict);
 
     if (data_dict.timer.match_timer_started) {
-        if (prev_remained_time > 183 && current_remained_time <= 183 || prev_remained_time > 3 && current_remained_time <= 3) {
+        console.log(current_remained_time);
+        if (prev_remained_time > 183.5 && current_remained_time <= 183.5 || prev_remained_time > 3.5 && current_remained_time <= 3.5) {
             playCountDownAudio();
+            console.log("aaaaaaaa");
         }
     } else if (!data_dict.timer.before_match && data_dict.timer.setting_timer_started) {
         if (!prev_timer_dict.setting_timer_started) {
