@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>F3RC2025得点表示</title>
+  </head>
+
+  <body id="display">
+    <!-- 送電線左 -->
+    <div id="cableContainerLeft">
+      <img src="img/cable.png" id="cable_l0" />
+      <img src="img/cable.png" id="cable_l1" />
+      <img src="img/cable.png" id="cable_l2" />
+    </div>
+    <div id="cableHandContainerLeft">
+      <img src="img/hand.png" id="cable_hand_l" />
+    </div>
+    <!-- 石炭左 -->
+    <div id="coalContainerLeft">
+      <img src="img/coal.png" id="coal_l0" />
+      <img src="img/coal.png" id="coal_l1" />
+      <img src="img/coal.png" id="coal_l2" />
+    </div>
+    <!-- 石油左 -->
+    <div id="oilContainerLeft">
+      <img src="img/oil.png" id="oil_l0" />
+      <img src="img/oil.png" id="oil_l1" />
+      <img src="img/oil.png" id="oil_l2" />
+    </div>
+    <div id="fuelHandContainerLeft">
+      <img src="img/hand.png" id="fuel_hand_l" />
+    </div>
+
+    <div id="cableContainerRight" class="cable">
+      <img src="img/cable.png" id="cable_r2" />
+      <img src="img/cable.png" id="cable_r1" />
+      <img src="img/cable.png" id="cable_r0" />
+    </div>
+    <div id="cableHandContainerRight">
+      <img src="img/hand.png" id="cable_hand_r" />
+    </div>
+    <div id="coalContainerRight">
+      <img src="img/coal.png" id="coal_r2" />
+      <img src="img/coal.png" id="coal_r1" />
+      <img src="img/coal.png" id="coal_r0" />
+    </div>
+    <div id="oilContainerRight">
+      <img src="img/oil.png" id="oil_r2" />
+      <img src="img/oil.png" id="oil_r1" />
+      <img src="img/oil.png" id="oil_r0" />
+    </div>
+    <div id="fuelHandContainerRight">
+      <img src="img/hand.png" id="fuel_hand_r" />
+    </div>
+    <!-- </div> -->
+    <!-- ポイント1 -->
+    <div id="point_l">000</div>
+
+    <!-- ポイント2 -->
+    <div id="point_r">000</div>
+
+    <!-- タイマー -->
+    <div id="timer">3:00</div>
+
+    <!-- 左側の大学 -->
+    <div>
+      <div id="univ_l">えふきゅーぶ大学</div>
+    </div>
+
+    <!-- 右側の大学 -->
+    <div>
+      <div id="univ_r">えふきゅーぶ大学</div>
+    </div>
+
+    <!-- power on1 -->
+    <div>
+      <img src="img/power_on.png" id="power_on_l" />
+    </div>
+
+    <!-- power on2 -->
+    <div>
+      <img src="img/power_on.png" id="power_on_r" />
+    </div>
+    <audio src="audio/count_down.mp3" id="music_count_down"></audio>
+    <audio src="audio/setting.mp3" id="music_setting"></audio>
+    <div id="cover">click to start</div>
+    <script src="main.js?t=<?php echo time(); ?>"></script>
+  </body>
+</html>
